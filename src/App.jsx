@@ -2,7 +2,7 @@ import "./App.css";
 import Header from "./components/Header/header"
 import PopNewCard from "./components/PopNewCard/PopNewCard";
 import PopBrowse from "./components/PopBrowse/PopBrowse";
-import Column from "./components/Column/Column";
+import Main from "./components/Main/Main";
 
 function App() {
   return (
@@ -34,19 +34,7 @@ function App() {
 
         <Header></Header>
 
-        <main className="main">
-          <div className="container">
-            <div className="main__block">
-              <div className="main__content">
-                <Column></Column>
-                <Column></Column>
-                <Column></Column>
-                <Column></Column>
-                <Column></Column>
-              </div>
-            </div>
-          </div>
-        </main>
+        <Main></Main>
       </div>
 
       <script src="js/script.js"></script>
