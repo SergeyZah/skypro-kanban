@@ -845,7 +845,7 @@ body {
 
 .main {
   width: 100%;
-  background-color: #eaeef6;
+  background: rgba(234, 238, 246, 1);
 }
 .main__block {
   width: 100%;
