@@ -36,8 +36,6 @@ function App() {
 
         <Main></Main>
       </div>
-
-      <script src="js/script.js"></script>
     </>
   );
 }
