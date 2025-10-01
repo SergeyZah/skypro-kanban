@@ -1,7 +1,5 @@
 #root {
-  max-width: 1280px;
   margin: 0 auto;
-  padding: 2rem;
   text-align: center;
 }
 
@@ -91,14 +89,13 @@ body {
   width: 100vw;
   min-height: 100vh;
   overflow: hidden;
-  background-color: #f1f1f1;
+  background: rgba(234, 238, 246, 1);
 }
 
 .container {
-  max-width: 1260px;
   width: 100%;
   margin: 0 auto;
-  padding: 0 30px;
+  padding: 0 128px 0 135px;
 }
 
 ._hover01:hover {
@@ -123,7 +120,7 @@ body {
   color: #ffffff;
 }
 
-.pop-user-set:target,
+/* .pop-user-set:target, */
 .pop-exit:target,
 .pop-new-card:target,
 .pop-browse:target {
@@ -778,7 +775,6 @@ body {
   position: relative;
   top: 0;
   left: 0;
-  padding: 0 10px;
 }
 .header__logo img {
   width: 85px;
@@ -828,7 +824,7 @@ body {
   padding: 0;
 }
 .header__pop-user-set {
-  display: none;
+  /* display: none; */
   position: absolute;
   top: 61px;
   right: 0;
@@ -850,25 +846,25 @@ body {
 .main__block {
   width: 100%;
   margin: 0 auto;
-  padding: 25px 0 49px;
+  padding: 40px 0 49px;
 }
 .main__content {
   width: 100%;
   display: flex;
+  gap: 19px;
 }
 .main__column {
-  width: 20%;
-  margin: 0 auto;
+  width: 220px;
   display: block;
 }
 
 .column__title {
-  padding: 0 10px;
-  margin: 15px 0;
+  margin: 0 0 20px;
+  text-align: start;
 }
 .column__title p {
   color: #94a6be;
-  font-size: 14px;
+  font-size: 16px;
   font-weight: 600;
   line-height: 1;
   text-transform: uppercase;
@@ -880,7 +876,6 @@ body {
   position: relative;
 }
 .cards__item {
-  padding: 5px;
   animation-name: card-animation;
   animation-duration: 500ms;
   animation-timing-function: linear;

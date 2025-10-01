@@ -1,6 +1,9 @@
+import { useState } from "react"
 import PopUser from "../PopUser/PopUser"
 
 function Header () {
+    const [disp, setDisp] = useState(false)
+    const onClick = () => setDisp(true)
     return (
         <>
             <header className="header">
@@ -8,7 +11,7 @@ function Header () {
                 <div className="header__block">
                 <div className="header__logo _show _light">
                     <a href="" target="_self">
-                    <img src="images/logo.png" alt="logo"></img>
+                    <img src="images/logo2.png" alt="logo"></img>
                     </a>
                 </div>
                 <div className="header__logo _dark">
@@ -20,10 +23,10 @@ function Header () {
                     <button className="header__btn-main-new _hover01" id="btnMainNew">
                     <a href="#popNewCard">Создать новую задачу</a>
                     </button>
-                    <a href="#user-set-target" className="header__user _hover02">
+                    <a href="#user-set-target" className="header__user _hover02" onClick={onClick}>
                     Ivan Ivanov
                     </a>
-                    <PopUser></PopUser>
+                    {disp ? <PopUser /> : null}
                 </nav>
                 </div>
             </div>
