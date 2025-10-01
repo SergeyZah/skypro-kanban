@@ -1,4 +1,4 @@
-function Card () {
+export function Card () {
 
     return (
         <>
@@ -57,5 +57,3 @@ function Card () {
         </>
     )
 }
-
-export default Card

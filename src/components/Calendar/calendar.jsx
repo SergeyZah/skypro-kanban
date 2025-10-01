@@ -1,4 +1,4 @@
-function Calendar () {
+export function Calendar () {
     return (
     <>
         <div className="pop-new-card__calendar calendar">
@@ -93,5 +93,3 @@ function Calendar () {
     </>
     )
 }
-
-export default Calendar

@@ -1,23 +1,21 @@
-import Column from "../Column/Column"
+import { Column } from "../Column/Column";
 
-function Main () {
-    return (
-        <>
-        <main className="main">
-          <div className="container">
-            <div className="main__block">
-              <div className="main__content">
-                <Column></Column>
-                <Column></Column>
-                <Column></Column>
-                <Column></Column>
-                <Column></Column>
-              </div>
+export function Main() {
+  return (
+    <>
+      <main className="main">
+        <div className="container">
+          <div className="main__block">
+            <div className="main__content">
+              <Column></Column>
+              <Column></Column>
+              <Column></Column>
+              <Column></Column>
+              <Column></Column>
             </div>
           </div>
-        </main>
-        </>
-    )
+        </div>
+      </main>
+    </>
+  );
 }
-
-export default Main

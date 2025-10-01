@@ -1,10 +1,10 @@
 import "./App.css";
-import Header from "./components/Header/header"
-import PopNewCard from "./components/PopNewCard/PopNewCard";
-import PopBrowse from "./components/PopBrowse/PopBrowse";
-import Main from "./components/Main/Main";
+import { Header } from "./components/Header/header";
+import { PopNewCard } from "./components/PopNewCard/PopNewCard";
+import { PopBrowse } from "./components/PopBrowse/PopBrowse";
+import { Main } from "./components/Main/Main";
 
-function App() {
+export function App() {
   return (
     <>
       <div className="wrapper">
@@ -39,5 +39,3 @@ function App() {
     </>
   );
 }
-
-export default App;
