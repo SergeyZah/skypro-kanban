@@ -2,8 +2,11 @@ import { useState } from "react";
 import { PopUser } from "../PopUser/PopUser";
 
 export function Header() {
-  const [disp, setDisp] = useState(false);
-  const onClick = () => setDisp(true);
+  const [style, setStyle] = useState("header__pop-user-set pop-user-set");
+  const onClick = () => {
+    if (style === "header__pop-user-set pop-user-set") setStyle("header__pop-user-set-block pop-user-set");
+    else setStyle("header__pop-user-set pop-user-set")
+  } 
   return (
     <>
       <header className="header">
@@ -30,7 +33,7 @@ export function Header() {
               >
                 Ivan Ivanov
               </a>
-              {disp ? <PopUser /> : null}
+              <PopUser style={style}/>
             </nav>
           </div>
         </div>

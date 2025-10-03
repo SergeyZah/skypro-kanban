@@ -1,15 +1,24 @@
 import { Card } from "../Card/Card";
 
-export function Column() {
+export function Column({ cards, status }) {
   return (
     <>
       <div className="main__column column">
         <div className="column__title">
-          <p>Без статуса</p>
+          <p>{status}</p>
         </div>
-        <div className="cards">
-          <Card></Card>
-        </div>
+        {cards.map((card) => {
+          return (
+              <div key={card.id} className="cards">
+                <Card
+                  id={card.id}
+                  theme={card.theme}
+                  title={card.title}
+                  date={card.date}
+                />
+              </div>
+          );
+        })}
       </div>
     </>
   );
