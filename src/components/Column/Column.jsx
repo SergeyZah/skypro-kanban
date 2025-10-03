@@ -1,18 +1,25 @@
-import Card from "../Card/Card"
+import { Card } from "../Card/Card";
 
-function Column () {
-    return (
-        <>
-        <div className="main__column column">
-                  <div className="column__title">
-                    <p>Без статуса</p>
-                  </div>
-                  <div className="cards">
-                    <Card></Card>
-                  </div>
+export function Column({ cards, status }) {
+  return (
+    <>
+      <div className="main__column column">
+        <div className="column__title">
+          <p>{status}</p>
         </div>
-        </>
-    )
+        {cards.map((card) => {
+          return (
+              <div key={card.id} className="cards">
+                <Card
+                  id={card.id}
+                  theme={card.theme}
+                  title={card.title}
+                  date={card.date}
+                />
+              </div>
+          );
+        })}
+      </div>
+    </>
+  );
 }
-
-export default Column
