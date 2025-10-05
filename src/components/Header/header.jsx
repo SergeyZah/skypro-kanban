@@ -2,10 +2,10 @@ import { useState } from "react";
 import { PopUser } from "../PopUser/PopUser";
 
 export function Header() {
-  const [style, setStyle] = useState("header__pop-user-set pop-user-set");
+  const [isVisible, setVisible] = useState(false)
   const onClick = () => {
-    if (style === "header__pop-user-set pop-user-set") setStyle("header__pop-user-set-block pop-user-set");
-    else setStyle("header__pop-user-set pop-user-set")
+    if (isVisible) setVisible(false);
+    else setVisible(true)
   } 
   return (
     <>
@@ -33,7 +33,7 @@ export function Header() {
               >
                 Ivan Ivanov
               </a>
-              <PopUser style={style}/>
+              {isVisible && <PopUser />}
             </nav>
           </div>
         </div>
