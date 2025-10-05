@@ -1,4 +1,4 @@
-export const CardList1 = [
+export const CardList = [
   {
     id: 1,
     theme: "Web Design",
@@ -34,58 +34,46 @@ export const CardList1 = [
     date: "30.10.23",
     status: "Без статуса",
   },
-];
-
-export const CardList2 = [
   {
-    id: 1,
+    id: 6,
     theme: "Research",
     title: "Название задачи",
     date: "30.10.23",
-    status: "Без статуса",
+    status: "Нужно сделать",
   },
-]
-
-export const CardList3 = [
   {
-    id: 1,
+    id: 7,
     theme: "Research",
     title: "Название задачи",
     date: "30.10.23",
-    status: "Без статуса",
+    status: "В работе",
   },
   {
-    id: 2,
+    id: 8,
     theme: "Copywriting",
     title: "Название задачи",
     date: "30.10.23",
-    status: "Без статуса",
+    status: "В работе",
   },
   {
-    id: 3,
+    id: 9,
     theme: "Web Design",
     title: "Название задачи",
     date: "30.10.23",
-    status: "Без статуса",
+    status: "В работе",
   },
-]
-
-export const CardList4 = [
   {
-    id: 1,
+    id: 10,
     theme: "Research",
     title: "Название задачи",
     date: "30.10.23",
-    status: "Без статуса",
+    status: "Тестирование",
   },
-]
-
-export const CardList5 = [
   {
-    id: 1,
+    id: 11,
     theme: "Research",
     title: "Название задачи",
     date: "30.10.23",
-    status: "Без статуса",
+    status: "Готово",
   },
 ]
