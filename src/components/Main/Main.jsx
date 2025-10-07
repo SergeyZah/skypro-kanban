@@ -1,5 +1,6 @@
 import { Column } from "../Column/Column";
 import { CardList } from "../data";
+import { MainS, Container, MainBlock, MainContent } from "./Main.styled.js";
 
 const COLUMN_TITLES = [
   "Без статуса",
@@ -28,10 +29,10 @@ export function Main() {
 
   return (
     <>
-      <main className="main">
-        <div className="container">
-          <div className="main__block">
-            <div className="main__content">
+      <MainS>
+        <Container>
+          <MainBlock>
+            <MainContent>
               {COLUMN_TITLES.map((title) => (
                 <Column
                   key={title}
@@ -39,10 +40,10 @@ export function Main() {
                   status={title}
                 />
               ))}
-            </div>
-          </div>
-        </div>
-      </main>
+            </MainContent>
+          </MainBlock>
+        </Container>
+      </MainS>
     </>
   );
 }
