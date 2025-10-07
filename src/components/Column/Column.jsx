@@ -1,25 +1,27 @@
 import { Card } from "../Card/Card";
+import { MainColumn, ColumnTitle, Cards } from "./Column.styled.js";
 
 export function Column({ cards, status }) {
   return (
     <>
-      <div className="main__column column">
-        <div className="column__title">
+      <MainColumn>
+        <ColumnTitle>
           <p>{status}</p>
-        </div>
-        {cards.map((card) => {
-          return (
-              <div key={card.id} className="cards">
-                <Card
-                  id={card.id}
-                  theme={card.theme}
-                  title={card.title}
-                  date={card.date}
-                />
-              </div>
-          );
-        })}
-      </div>
+        </ColumnTitle>
+        <Cards>
+          {cards.map((card) => {
+            return (
+              <Card
+                key={card.id}
+                id={card.id}
+                theme={card.theme}
+                title={card.title}
+                date={card.date}
+              />
+            );
+          })}
+        </Cards>
+      </MainColumn>
     </>
   );
 }

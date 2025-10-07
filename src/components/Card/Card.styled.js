@@ -47,6 +47,10 @@ export const CardDate = styled.div`
     color: #94a6be;
     letter-spacing: 0.2px;
   }
+
+  svg {
+    width: 13px;
+  }
 `;
 
 export const CardBtn = styled.div`
@@ -72,23 +76,23 @@ export const CardTheme = styled.div`
   border-radius: 18px;
 
   &.card__theme--orange {
-    background-color:rgba(255, 228, 194, 1);
+    background-color: rgba(255, 228, 194, 1);
     p {
-      color:rgba(255, 109, 0, 1);
+      color: rgba(255, 109, 0, 1);
     }
   }
 
   &.card__theme--green {
-    background-color:rgba(180, 253, 209, 1);
+    background-color: rgba(180, 253, 209, 1);
     p {
-      color:rgba(6, 177, 110, 1);
+      color: rgba(6, 177, 110, 1);
     }
   }
 
   &.card__theme--purple {
-    background-color:rgba(233, 212, 255, 1);
+    background-color: rgba(233, 212, 255, 1);
     p {
-      color:rgba(154, 72, 241, 1);
+      color: rgba(154, 72, 241, 1);
     }
   }
 
