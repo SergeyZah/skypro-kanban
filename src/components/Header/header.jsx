@@ -1,31 +1,39 @@
 import { useState } from "react";
-import { PopUser } from "../PopUser/PopUser";
+import { PopUser } from "../PopUser/PopUser.jsx";
+import {
+  HeaderS,
+  HeaderBlock,
+  HeaderNav,
+  HeaderButtonMainNew,
+  HeaderLogo,
+} from "./Header.styled.js";
+import { Container } from "../Main/Main.styled.js";
 
 export function Header() {
-  const [isVisible, setVisible] = useState(false)
+  const [isVisible, setVisible] = useState(false);
   const onClick = () => {
     if (isVisible) setVisible(false);
-    else setVisible(true)
-  } 
+    else setVisible(true);
+  };
   return (
     <>
-      <header className="header">
-        <div className="container">
-          <div className="header__block">
-            <div className="header__logo _show _light">
+      <HeaderS>
+        <Container>
+          <HeaderBlock>
+            <div className=" _show _light">
               <a href="" target="_self">
-                <img src="images/logo2.png" alt="logo"></img>
+                <HeaderLogo src="images/logo2.png" alt="logo"/>
               </a>
             </div>
-            <div className="header__logo _dark">
+            <div className=" _dark">
               <a href="" target="_self">
-                <img src="images/logo_dark.png" alt="logo"></img>
+                <HeaderLogo src="images/logo_dark.png" alt="logo"/>
               </a>
             </div>
-            <nav className="header__nav">
-              <button className="header__btn-main-new _hover01" id="btnMainNew">
+            <HeaderNav>
+              <HeaderButtonMainNew id="btnMainNew">
                 <a href="#popNewCard">Создать новую задачу</a>
-              </button>
+              </HeaderButtonMainNew>
               <a
                 href="#user-set-target"
                 className="header__user _hover02"
@@ -34,10 +42,10 @@ export function Header() {
                 Ivan Ivanov
               </a>
               {isVisible && <PopUser />}
-            </nav>
-          </div>
-        </div>
-      </header>
+            </HeaderNav>
+          </HeaderBlock>
+        </Container>
+      </HeaderS>
     </>
   );
 }
