@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { PopUser } from "../PopUser/PopUser.jsx";
+import { PopUser } from "../PopUser/PopUser";
 import {
   HeaderS,
   HeaderBlock,
@@ -20,12 +20,12 @@ export function Header() {
       <HeaderS>
         <Container>
           <HeaderBlock>
-            <div className=" _show _light">
+            <div className="_show _light">
               <a href="" target="_self">
-                <HeaderLogo src="images/logo2.png" alt="logo"/>
+                <HeaderLogo src="images/logo.png" alt="logo"/>
               </a>
             </div>
-            <div className=" _dark">
+            <div className="_dark">
               <a href="" target="_self">
                 <HeaderLogo src="images/logo_dark.png" alt="logo"/>
               </a>
