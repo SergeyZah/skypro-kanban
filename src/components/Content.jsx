@@ -5,7 +5,7 @@ import { Header } from "./Header/header";
 import { Main } from "./Main/Main";
 import { PopExit } from "./PopExit/PopExit";
 
-export function Content() {
+export function Content () {
   return (
     <>
       <PopExit />

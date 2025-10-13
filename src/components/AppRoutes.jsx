@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
-import { Loader } from "./Loader";
-import { Content } from "./Content";
+import { Route, Routes } from "react-router-dom";
+import { MainPage } from "../pages/Main";
+import { SignInPage } from "../pages/SignIn";
+import { SignUpPage } from "../pages/SignUp";
 
 export function AppRoutes () {
     const [loading, setLoading] = useState(true);
@@ -12,8 +14,10 @@ export function AppRoutes () {
       }, []);
     
       return (
-        <>
-          <div className="wrapper">{loading ? <Loader /> : <Content />}</div>
-        </>
-      );
+        <Routes>
+          <Route path="/" element={<MainPage loading={loading} />} />
+          <Route path="/sign-in" element={<SignInPage />} />
+          <Route path="/sign-up" element={<SignUpPage />}/>
+        </Routes>
+      )
 }
