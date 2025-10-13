@@ -1,4 +1,6 @@
 import { Link, useNavigate } from "react-router-dom";
+import { BaseButton } from "./Button";
+import { BaseInput } from "./Input";
 
 export const AuthForm = ({ isSignUp }) => {
   const navigate = useNavigate();
@@ -9,13 +11,12 @@ export const AuthForm = ({ isSignUp }) => {
   return (
     <div className="bg">
       <div className="modal">
-        <div className="logo">Skypro-kanban</div>
         <div className="wrapper">
           <h2 className="title">{isSignUp ? "Регистрация" : "Вход"}</h2>
           <form className="form" id="form" action="#">
             <div className="input-wrapper">
               {isSignUp && (
-                <BaseInput
+                <input
                   tag="input"
                   className="auth-input"
                   type="text"
@@ -24,7 +25,7 @@ export const AuthForm = ({ isSignUp }) => {
                   placeholder="Имя"
                 />
               )}
-              <BaseInput
+              <input
                 tag="input"
                 className="auth-input"
                 type="text"
@@ -32,7 +33,7 @@ export const AuthForm = ({ isSignUp }) => {
                 id="formlogin"
                 placeholder="Эл. почта"
               />
-              <BaseInput
+              <input
                 tag="input"
                 className="auth-input"
                 type="password"
@@ -42,13 +43,13 @@ export const AuthForm = ({ isSignUp }) => {
               />
             </div>
 
-            <BaseButton
+            <button
               onClick={handleLogin}
               type="secondary"
-              fullWidth={true}
               className="button-enter"
-              text={isSignUp ? "Зарегистрироваться" : "Войти"}
-            />
+            >
+              {isSignUp ? "Зарегистрироваться" : "Войти"}
+            </button>
             {!isSignUp && (
               <div className="form-group">
                 <p>Нужно зарегистрироваться?</p>
