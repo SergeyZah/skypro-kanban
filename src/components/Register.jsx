@@ -1,5 +1,5 @@
 import { AuthForm } from "./AuthForm/AuthForm"
 
-export const SignUp = () => {
+export const Register = () => {
     return <AuthForm isSignUp/>
 }

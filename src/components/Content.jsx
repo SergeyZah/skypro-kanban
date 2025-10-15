@@ -1,11 +1,11 @@
-import React from "react";
 import { PopNewCard } from "./PopNewCard/PopNewCard";
 import { PopBrowse } from "./PopBrowse/PopBrowse";
 import { Header } from "./Header/header";
 import { Main } from "./Main/Main";
 import { PopExit } from "./PopExit/PopExit";
+import { Outlet } from "react-router-dom";
 
-export function Content () {
+export function Content() {
   return (
     <>
       <PopExit />
@@ -17,6 +17,8 @@ export function Content () {
       <Header></Header>
 
       <Main></Main>
+
+      <Outlet />
     </>
   );
 }

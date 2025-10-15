@@ -49,13 +49,13 @@ export const AuthForm = ({ isSignUp }) => {
             {!isSignUp && (
               <FormGroup>
                 <p>Нужно зарегистрироваться?</p>
-                <Link to="/sign-up">Регистрируйтесь здесь</Link>
+                <Link to="/register">Регистрируйтесь здесь</Link>
               </FormGroup>
             )}
             {isSignUp && (
               <FormGroup>
                 <p>Уже есть аккаунт?</p>
-                <Link to="/sign-in">Войдите здесь</Link>
+                <Link to="/login">Войдите здесь</Link>
               </FormGroup>
             )}
           </FormBlock>
