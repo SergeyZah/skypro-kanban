@@ -15,9 +15,14 @@ export function AppRoutes() {
 
   return (
     <Routes>
-      <Route path="/" element={<MainPage loading={loading} />}></Route>
+      <Route path="/" element={<MainPage loading={loading} />}>
+        {/* <Route path="/card/add" element={<NewCardPage />} />
+        <Route path="/card/:id" element={<CardPage />} />
+        <Route path="/exit" element={<ExitPage />} /> */}
+      </Route>
       <Route path="/login" element={<LoginPage />} />
       <Route path="/register" element={<RegisterPage />} />
+      {/* <Route path="*" element={<NotFoundPage />} /> */}
     </Routes>
   );
 }
