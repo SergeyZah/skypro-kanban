@@ -1,7 +1,17 @@
 import { Calendar } from "../Calendar/calendar";
 import { Link } from "react-router-dom";
+import { CategoriesTheme } from "./PopBrowse.styled";
+
 
 export function PopBrowse({task}) {
+  const Colors = {
+    "Web Design": "card__theme--orange",
+    Research: "card__theme--green",
+    Copywriting: "card__theme--purple",
+  };
+
+  const ColorTheme = Colors[task.theme];
+
   return (
     <>
       <div className="pop-browse" id="popBrowse">
@@ -10,9 +20,9 @@ export function PopBrowse({task}) {
             <div className="pop-browse__content">
               <div className="pop-browse__top-block">
                 <h3 className="pop-browse__ttl">{task.title}</h3>
-                <div className="categories__theme theme-top _orange _active-category">
-                  <p className="_orange">{task.theme}</p>
-                </div>
+                <CategoriesTheme className={ColorTheme}>
+                  <p>{task.theme}</p>
+                </CategoriesTheme>
               </div>
               <div className="pop-browse__status status">
                 <p className="status__p subttl">{task.status}</p>
