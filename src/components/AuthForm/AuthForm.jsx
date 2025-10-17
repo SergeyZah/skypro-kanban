@@ -1,10 +1,11 @@
 import { Link, useNavigate } from "react-router-dom";
 import { BG, ButtonForm, FormBlock, FormGroup, InputComponent, InputWrapper, Modal, Title, Wrapper } from "./AuthForm.styled";
 
-export const AuthForm = ({ isSignUp }) => {
+export const AuthForm = ({ isSignUp, setIsAuth }) => {
   const navigate = useNavigate();
   const handleLogin = (e) => {
     e.preventDefault();
+    setIsAuth(true)
     navigate("/");
   };
   return (

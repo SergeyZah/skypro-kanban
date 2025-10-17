@@ -1,5 +1,5 @@
 import { AuthForm } from "./AuthForm/AuthForm"
 
-export const Login = () => {
-    return <AuthForm isSignUp={false}/>
+export const Login = ({setIsAuth}) => {
+    return <AuthForm setIsAuth={setIsAuth} isSignUp={false}/>
 }
