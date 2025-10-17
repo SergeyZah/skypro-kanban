@@ -8,6 +8,7 @@ import {
   CardDate,
   CardBtn,
 } from "./Card.styled.js";
+import { Link, useNavigate } from "react-router-dom";
 
 export function Card({ id, theme, title, date }) {
   const Colors = {
@@ -16,7 +17,13 @@ export function Card({ id, theme, title, date }) {
     Copywriting: "card__theme--purple",
   };
 
-  const ColorTheme = Colors[theme]
+  const ColorTheme = Colors[theme];
+
+  const navigate = useNavigate();
+
+  const handleCardClick = () => {
+    navigate(`/card/${id}`);
+  };
 
   return (
     <>
@@ -26,13 +33,14 @@ export function Card({ id, theme, title, date }) {
             <CardTheme className={ColorTheme}>
               <p>{theme}</p>
             </CardTheme>
-            <a href="#popBrowse" target="_self">
-              <CardBtn>
+            <>
+              <CardBtn onClick={handleCardClick}>
                 <div></div>
                 <div></div>
                 <div></div>
               </CardBtn>
-            </a>
+            </>
+
           </CardGroup>
           <CardContent>
             <a href="" target="_blank">

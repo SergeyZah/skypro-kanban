@@ -4,7 +4,7 @@ import { MainPage } from "../pages/Main";
 import { LoginPage } from "../pages/Login";
 import { RegisterPage } from "../pages/Register";
 import { NewCardPage } from "../pages/NewCard";
-import { NotFoundPage } from "../pages/NotFound";
+import { NotFoundPage } from "../pages/NotFound/NotFound";
 import { CardPage } from "../pages/Card";
 import { ExitPage } from "../pages/Exit";
 

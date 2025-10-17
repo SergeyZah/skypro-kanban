@@ -1,5 +1,11 @@
-import { PopBrowse } from "../components/PopBrowse/PopBrowse"
+import { useParams } from "react-router-dom";
+import { PopBrowse } from "../components/PopBrowse/PopBrowse";
+import { CardList } from "../components/data";
 
 export const CardPage = () => {
-    return <PopBrowse />
-}
+  const { id } = useParams();
+
+  const task = CardList.find((t) => t.id === id);
+
+  return <PopBrowse task={task} />;
+};

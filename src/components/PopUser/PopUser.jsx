@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 export function PopUser() {
 
   return (
@@ -14,7 +16,7 @@ export function PopUser() {
           ></input>
         </div>
         <button type="button" className="_hover03">
-          <a href="#popExit">Выйти</a>
+          <Link to="/exit">Выйти</Link>
         </button>
       </div>
     </>
