@@ -1,5 +1,5 @@
 import { PopExit } from "../components/PopExit/PopExit"
 
-export const NewCardPage = () => {
+export const ExitPage = () => {
     return <PopExit />
 }

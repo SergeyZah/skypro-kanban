@@ -3,6 +3,10 @@ import { Route, Routes } from "react-router-dom";
 import { MainPage } from "../pages/Main";
 import { LoginPage } from "../pages/Login";
 import { RegisterPage } from "../pages/Register";
+import { NewCardPage } from "../pages/NewCard";
+import { NotFoundPage } from "../pages/NotFound";
+import { CardPage } from "../pages/Card";
+import { ExitPage } from "../pages/Exit";
 
 export function AppRoutes() {
   const [loading, setLoading] = useState(true);
@@ -16,13 +20,13 @@ export function AppRoutes() {
   return (
     <Routes>
       <Route path="/" element={<MainPage loading={loading} />}>
-        {/* <Route path="/card/add" element={<NewCardPage />} />
+        <Route path="/card-add" element={<NewCardPage />} />
         <Route path="/card/:id" element={<CardPage />} />
-        <Route path="/exit" element={<ExitPage />} /> */}
+        <Route path="/exit" element={<ExitPage />} />
       </Route>
       <Route path="/login" element={<LoginPage />} />
       <Route path="/register" element={<RegisterPage />} />
-      {/* <Route path="*" element={<NotFoundPage />} /> */}
+      <Route path="*" element={<NotFoundPage />} />
     </Routes>
   );
 }

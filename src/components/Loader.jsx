@@ -1,6 +1,5 @@
 
-export const Loader = () => {
-  return (
-    <div className="loader-text">Данные загружаются...</div>
-  )
+export const Loader = ({loading}) => {
+  return loading && <div className="loader-text">Данные загружаются...</div>
+  
 }
