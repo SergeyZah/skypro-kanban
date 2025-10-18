@@ -8,7 +8,7 @@ import {
   HeaderLogo,
 } from "./Header.styled.js";
 import { Container } from "../Main/Main.styled.js";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 export function Header() {
   const [isVisible, setVisible] = useState(false);

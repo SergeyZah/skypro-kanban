@@ -5,6 +5,12 @@ export const MainColumn = styled.div`
   display: flex;
   flex-direction: column;
   gap: 20px;
+
+  @media screen and (max-width: 1200px) {
+    width: 100%;
+    margin: 0 auto;
+    display: block;
+  }
 `;
 
 export const ColumnTitle = styled.div`
@@ -30,4 +36,10 @@ export const Cards = styled.div`
   display: flex;
   flex-direction: column;
   gap: 10px;
+
+  @media screen and (max-width: 1200px) {
+    width: 100%;
+    display: flex;
+    overflow-y: auto;
+  }
 `;
