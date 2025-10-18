@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { PopUser } from "../PopUser/PopUser.jsx";
+import { PopUser } from "../PopUser/PopUser";
 import {
   HeaderS,
   HeaderBlock,
@@ -8,6 +8,7 @@ import {
   HeaderLogo,
 } from "./Header.styled.js";
 import { Container } from "../Main/Main.styled.js";
+import { useNavigate } from "react-router-dom";
 
 export function Header() {
   const [isVisible, setVisible] = useState(false);
@@ -15,24 +16,31 @@ export function Header() {
     if (isVisible) setVisible(false);
     else setVisible(true);
   };
+
+  const navigate = useNavigate();
+
+  const openPopNewCardModal = () => {
+    navigate("/card-add");
+  };
+
   return (
     <>
       <HeaderS>
         <Container>
           <HeaderBlock>
-            <div className=" _show _light">
+            <div className="_show _light">
               <a href="" target="_self">
-                <HeaderLogo src="images/logo2.png" alt="logo"/>
+                <HeaderLogo src="images/logo.png" alt="logo"/>
               </a>
             </div>
-            <div className=" _dark">
+            <div className="_dark">
               <a href="" target="_self">
                 <HeaderLogo src="images/logo_dark.png" alt="logo"/>
               </a>
             </div>
             <HeaderNav>
-              <HeaderButtonMainNew id="btnMainNew">
-                <a href="#popNewCard">Создать новую задачу</a>
+              <HeaderButtonMainNew id="btnMainNew" onClick={openPopNewCardModal}>
+                Создать новую задачу
               </HeaderButtonMainNew>
               <a
                 href="#user-set-target"

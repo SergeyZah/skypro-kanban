@@ -1,6 +1,17 @@
 import { Calendar } from "../Calendar/calendar";
+import { Link } from "react-router-dom";
+import { CategoriesTheme } from "./PopBrowse.styled";
 
-export function PopBrowse() {
+
+export function PopBrowse({task}) {
+  const Colors = {
+    "Web Design": "card__theme--orange",
+    Research: "card__theme--green",
+    Copywriting: "card__theme--purple",
+  };
+
+  const ColorTheme = Colors[task.theme];
+
   return (
     <>
       <div className="pop-browse" id="popBrowse">
@@ -8,13 +19,13 @@ export function PopBrowse() {
           <div className="pop-browse__block">
             <div className="pop-browse__content">
               <div className="pop-browse__top-block">
-                <h3 className="pop-browse__ttl">Название задачи</h3>
-                <div className="categories__theme theme-top _orange _active-category">
-                  <p className="_orange">Web Design</p>
-                </div>
+                <h3 className="pop-browse__ttl">{task.title}</h3>
+                <CategoriesTheme className={ColorTheme}>
+                  <p>{task.theme}</p>
+                </CategoriesTheme>
               </div>
               <div className="pop-browse__status status">
-                <p className="status__p subttl">Статус</p>
+                <p className="status__p subttl">{task.status}</p>
                 <div className="status__themes">
                   <div className="status__theme _hide">
                     <p>Без статуса</p>
@@ -70,7 +81,7 @@ export function PopBrowse() {
                   </button>
                 </div>
                 <button className="btn-browse__close _btn-bg _hover01">
-                  <a href="#">Закрыть</a>
+                  <Link to="/">Закрыть</Link>
                 </button>
               </div>
               <div className="pop-browse__btn-edit _hide">
