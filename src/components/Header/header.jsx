@@ -1,47 +1,66 @@
 import { useState } from "react";
-import { PopUser } from "../PopUser/PopUser.jsx";
+import { PopUser } from "../PopUser/PopUser";
 import {
   HeaderS,
   HeaderBlock,
   HeaderNav,
   HeaderButtonMainNew,
   HeaderLogo,
+  HeaderUser,
+  PopUserOverlay,
 } from "./Header.styled.js";
 import { Container } from "../Main/Main.styled.js";
+import { useNavigate } from "react-router-dom";
 
 export function Header() {
-  const [isVisible, setVisible] = useState(false);
+  const [isVisiblePopUser, setVisiblePopUser] = useState(false);
   const onClick = () => {
-    if (isVisible) setVisible(false);
-    else setVisible(true);
+    setVisiblePopUser(!isVisiblePopUser);
   };
+
+  const closePopUser = () => {
+    setVisiblePopUser(false);
+  };
+
+  const navigate = useNavigate();
+
+  const openPopNewCardModal = () => {
+    navigate("/card-add");
+  };
+
   return (
     <>
       <HeaderS>
         <Container>
           <HeaderBlock>
-            <div className=" _show _light">
+            <div className="_show _light">
               <a href="" target="_self">
-                <HeaderLogo src="images/logo2.png" alt="logo"/>
+                <HeaderLogo src="images/logo.png" alt="logo" />
               </a>
             </div>
-            <div className=" _dark">
+            <div className="_dark">
               <a href="" target="_self">
-                <HeaderLogo src="images/logo_dark.png" alt="logo"/>
+                <HeaderLogo src="images/logo_dark.png" alt="logo" />
               </a>
             </div>
             <HeaderNav>
-              <HeaderButtonMainNew id="btnMainNew">
-                <a href="#popNewCard">Создать новую задачу</a>
-              </HeaderButtonMainNew>
-              <a
-                href="#user-set-target"
-                className="header__user _hover02"
-                onClick={onClick}
+              <HeaderButtonMainNew
+                id="btnMainNew"
+                onClick={openPopNewCardModal}
               >
-                Ivan Ivanov
-              </a>
-              {isVisible && <PopUser />}
+                Создать новую задачу
+              </HeaderButtonMainNew>
+              <HeaderUser onClick={onClick}>Ivan Ivanov</HeaderUser>
+              {isVisiblePopUser && (
+                <PopUserOverlay onClick={closePopUser}>
+                  <div onClick={(e) => e.stopPropagation()}>
+                    <PopUser
+                      $isVisible={isVisiblePopUser}
+                      onClose={closePopUser}
+                    />
+                  </div>
+                </PopUserOverlay>
+              )}
             </HeaderNav>
           </HeaderBlock>
         </Container>

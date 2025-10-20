@@ -44,8 +44,54 @@ export const HeaderButtonMainNew = styled.button`
   &:hover {
     background-color: #33399b;
   }
+
+  @media screen and (max-width: 495px) {
+    z-index: 3;
+    position: fixed;
+    left: 16px;
+    bottom: 30px;
+    top: auto;
+    width: calc(100vw - 32px);
+    height: 40px;
+    border-radius: 4px;
+    margin-right: 0;
+  }
 `;
 
 export const HeaderLogo = styled.img`
   width: 85px;
+`;
+
+export const HeaderUser = styled.a`
+  height: 20px;
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  line-height: 20px;
+  color: #565eef;
+
+  &::after {
+    content: "";
+    display: block;
+    width: 6px;
+    height: 6px;
+    border-radius: 1px;
+    border-left: 1.9px solid #565eef;
+    border-bottom: 1.9px solid #565eef;
+    transform: rotate(-45deg);
+    margin: -6px 0 0 5px;
+    padding: 0;
+  }
+`;
+
+export const PopUserOverlay = styled.div`
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0);
+  z-index: 99;
 `;

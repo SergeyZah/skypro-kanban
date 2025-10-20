@@ -1,23 +1,6 @@
 import "./App.css";
-import { useEffect, useState } from "react";
-import { Content } from "./components/Content";
-import { Loader } from "./components/Loader";
+import { AppRoutes } from "./components/AppRoutes";
 
 export function App() {
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    setTimeout(() => {
-      setLoading(false);
-    }, 1000);
-  }, []);
-
-  return (
-    <>
-      <div className="wrapper">
-        {loading ? <Loader /> :<Content />} 
-      </div>
-      
-    </>
-  );
+  return <AppRoutes />;
 }
