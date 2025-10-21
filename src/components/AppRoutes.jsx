@@ -29,7 +29,7 @@ export function AppRoutes() {
         </Route>
       </Route>
       <Route path="/login" element={<LoginPage setIsAuth={setIsAuth}/>} />
-      <Route path="/register" element={<RegisterPage />} />
+      <Route path="/register" element={<RegisterPage setIsAuth={setIsAuth}/>} />
       <Route path="*" element={<NotFoundPage />} />
     </Routes>
   );

@@ -28,6 +28,9 @@ export function Header() {
     navigate("/card-add");
   };
 
+  const userInfo = JSON.parse(localStorage.getItem("userInfo"));
+  const userName = userInfo?.name || "Пользователь";
+
   return (
     <>
       <HeaderS>
@@ -50,7 +53,7 @@ export function Header() {
               >
                 Создать новую задачу
               </HeaderButtonMainNew>
-              <HeaderUser onClick={onClick}>Ivan Ivanov</HeaderUser>
+              <HeaderUser onClick={onClick}>{userName}</HeaderUser>
               {isVisiblePopUser && (
                 <PopUserOverlay onClick={closePopUser}>
                   <div onClick={(e) => e.stopPropagation()}>

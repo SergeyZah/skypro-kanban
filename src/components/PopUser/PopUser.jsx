@@ -3,11 +3,15 @@ import { PopUserSet, PopUserSetButton, PopUserSetMail, PopUserSetName, PopUserSe
 
 export function PopUser() {
 
+    const userInfo = JSON.parse(localStorage.getItem("userInfo"));
+  const userName = userInfo?.name || "Пользователь";
+  const userLogin = userInfo?.login || "Эл. почта";
+
   return (
     <>
       <PopUserSet id="user-set-target">
-        <PopUserSetName>Ivan Ivanov</PopUserSetName>
-        <PopUserSetMail>ivan.ivanov@gmail.com</PopUserSetMail>
+        <PopUserSetName>{userName}</PopUserSetName>
+        <PopUserSetMail>{userLogin}</PopUserSetMail>
         <PopUserSetTheme>
           <p>Темная тема</p>
           <input
