@@ -10,7 +10,7 @@ import {
   Title,
   Wrapper,
 } from "./AuthForm.styled";
-import { signIn, signUp } from "../../services/Auth";
+import { signIn, signUp } from "../../services/auth";
 import { useState } from "react";
 
 export const AuthForm = ({ isSignUp, setIsAuth }) => {
@@ -79,6 +79,7 @@ export const AuthForm = ({ isSignUp, setIsAuth }) => {
       if (data) {
         setIsAuth(true);
         localStorage.setItem("userInfo", JSON.stringify(data));
+        localStorage.setItem("token", JSON.stringify(data.token));
         navigate("/");
       }
     } catch (err) {
@@ -95,7 +96,7 @@ export const AuthForm = ({ isSignUp, setIsAuth }) => {
             <InputWrapper>
               {isSignUp && (
                 <InputComponent
-                  tag="input"
+                  error={errors.name}
                   type="text"
                   name="name"
                   id="formname"
@@ -105,7 +106,7 @@ export const AuthForm = ({ isSignUp, setIsAuth }) => {
                 />
               )}
               <InputComponent
-                tag="input"
+                error={errors.login}
                 type="text"
                 name="login"
                 id="formlogin"
@@ -114,7 +115,7 @@ export const AuthForm = ({ isSignUp, setIsAuth }) => {
                 onChange={handleChange}
               />
               <InputComponent
-                tag="input"
+                error={errors.password}
                 type="password"
                 name="password"
                 id="formpassword"

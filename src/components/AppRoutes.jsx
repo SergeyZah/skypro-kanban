@@ -11,7 +11,7 @@ import { PrivateRoute } from "./PrivateRoute";
 
 export function AppRoutes() {
   const [loading, setLoading] = useState(true);
-  const [isAuth, setIsAuth] = useState(false);
+  const [isAuth, setIsAuth] = useState(() => !!localStorage.getItem("token"));
 
   useEffect(() => {
     setTimeout(() => {

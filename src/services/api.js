@@ -9,7 +9,7 @@ export async function fetchTasks({ token }) {
         Authorization: "Bearer " + token,
       },
     });
-    return data.data;
+    return data.data.tasks;
   } catch (error) {
     throw new Error(error.message);
   }
