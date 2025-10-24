@@ -11,7 +11,7 @@ import { PrivateRoute } from "./PrivateRoute";
 
 export function AppRoutes() {
   const [loading, setLoading] = useState(true);
-  const [isAuth, setIsAuth] = useState(false);
+  const [isAuth, setIsAuth] = useState(() => !!localStorage.getItem("token"));
 
   useEffect(() => {
     setTimeout(() => {
@@ -29,7 +29,7 @@ export function AppRoutes() {
         </Route>
       </Route>
       <Route path="/login" element={<LoginPage setIsAuth={setIsAuth}/>} />
-      <Route path="/register" element={<RegisterPage />} />
+      <Route path="/register" element={<RegisterPage setIsAuth={setIsAuth}/>} />
       <Route path="*" element={<NotFoundPage />} />
     </Routes>
   );

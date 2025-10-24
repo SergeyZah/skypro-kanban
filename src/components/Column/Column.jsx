@@ -12,7 +12,7 @@ export function Column({ cards, status }) {
           {cards.map((card) => {
             return (
               <Card
-                key={card.id}
+                key={card._id}
                 id={card.id}
                 theme={card.theme}
                 title={card.title}
