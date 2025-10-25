@@ -249,7 +249,7 @@ body {
   justify-content: space-between;
 }
 
-.pop-new-card {
+/* .pop-new-card {
   width: 100%;
   min-width: 375px;
   height: 100%;
@@ -373,7 +373,7 @@ body {
   font-size: 14px;
   font-weight: 600;
   line-height: 1;
-}
+} */
 
 .calendar {
   width: 182px;

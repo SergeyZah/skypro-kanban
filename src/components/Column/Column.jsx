@@ -2,6 +2,8 @@ import { Card } from "../Card/Card";
 import { MainColumn, ColumnTitle, Cards } from "./Column.styled.js";
 
 export function Column({ cards, status }) {
+
+  console.log(cards)
   return (
     <>
       <MainColumn>
@@ -14,7 +16,7 @@ export function Column({ cards, status }) {
               <Card
                 key={card._id}
                 id={card.id}
-                theme={card.theme}
+                theme={card.topic}
                 title={card.title}
                 date={card.date}
               />

@@ -11,6 +11,7 @@ export function PopBrowse({task}) {
   };
 
   const ColorTheme = Colors[task.theme];
+  console.log(task.theme)
 
   return (
     <>

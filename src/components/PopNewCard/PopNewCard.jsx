@@ -1,69 +1,101 @@
+import { useNavigate } from "react-router-dom";
 import { Calendar } from "../Calendar/calendar";
-import { Link } from "react-router-dom";
+
+import {
+  CategoriesTheme,
+  CategoriesThemes,
+  FormNewArea,
+  FormNewBlock,
+  FormNewCreate,
+  FormNewInput,
+  PopNewCardBlock,
+  PopNewCardCategories,
+  PopNewCardCategoriesParagraf,
+  PopNewCardClose,
+  PopNewCardContainer,
+  PopNewCardContent,
+  PopNewCardForm,
+  PopNewCardS,
+  PopNewCardTitle,
+  PopNewCardWrap,
+  SubTitle,
+} from "./PopNewCard.styled";
+import { useState } from "react";
 
 export function PopNewCard() {
+  const [category, setCategory] = useState("Web Design");
+  const navigate = useNavigate();
+
+  const onCloseModal = () => {
+    navigate("/");
+  };
   return (
     <>
-      <div className="pop-new-card" id="popNewCard">
-        <div className="pop-new-card__container">
-          <div className="pop-new-card__block">
-            <div className="pop-new-card__content">
-              <h3 className="pop-new-card__ttl">Создание задачи</h3>
-              <Link to="/" className="pop-new-card__close">&#10006;</Link>
-              <div className="pop-new-card__wrap">
-                <form
-                  className="pop-new-card__form form-new"
-                  id="formNewCard"
-                  action="#"
-                >
-                  <div className="form-new__block">
-                    <label htmlFor="formTitle" className="subttl">
-                      Название задачи
-                    </label>
-                    <input
-                      className="form-new__input"
+      <PopNewCardS id="popNewCard">
+        <PopNewCardContainer>
+          <PopNewCardBlock>
+            <PopNewCardContent>
+              <PopNewCardTitle>Создание задачи</PopNewCardTitle>
+              <PopNewCardClose onClick={onCloseModal}>&#10006;</PopNewCardClose>
+              <PopNewCardWrap>
+                <PopNewCardForm id="formNewCard" action="#">
+                  <FormNewBlock>
+                    <SubTitle htmlFor="formTitle">Название задачи</SubTitle>
+                    <FormNewInput
                       type="text"
                       name="name"
                       id="formTitle"
                       placeholder="Введите название задачи..."
                       autoFocus
-                    ></input>
-                  </div>
-                  <div className="form-new__block">
-                    <label htmlFor="textArea" className="subttl">
-                      Описание задачи
-                    </label>
-                    <textarea
-                      className="form-new__area"
+                    ></FormNewInput>
+                  </FormNewBlock>
+                  <FormNewBlock>
+                    <SubTitle htmlFor="textArea">Описание задачи</SubTitle>
+                    <FormNewArea
                       name="text"
                       id="textArea"
                       placeholder="Введите описание задачи..."
-                    ></textarea>
-                  </div>
-                </form>
+                    ></FormNewArea>
+                  </FormNewBlock>
+                </PopNewCardForm>
                 <Calendar></Calendar>
-              </div>
-              <div className="pop-new-card__categories categories">
-                <p className="categories__p subttl">Категория</p>
-                <div className="categories__themes">
-                  <div className="categories__theme _orange _active-category">
+              </PopNewCardWrap>
+              <PopNewCardCategories>
+                <PopNewCardCategoriesParagraf>
+                  Категория
+                </PopNewCardCategoriesParagraf>
+                <CategoriesThemes>
+                  <CategoriesTheme
+                    onClick={() => setCategory("Web Design")}
+                    className={`_orange ${
+                      category === "Web Design" ? "_active-category" : ""
+                    }`}
+                  >
                     <p className="_orange">Web Design</p>
-                  </div>
-                  <div className="categories__theme _green">
+                  </CategoriesTheme>
+                  <CategoriesTheme
+                    onClick={() => setCategory("Research")}
+                    className={`_green ${
+                      category === "Research" ? "_active-category" : ""
+                    }`}
+                  >
                     <p className="_green">Research</p>
-                  </div>
-                  <div className="categories__theme _purple">
+                  </CategoriesTheme>
+                  <CategoriesTheme
+                    onClick={() => setCategory("Copywriting")}
+                    className={`_purple ${
+                      category === "Copywriting" ? "_active-category" : ""
+                    }`}
+                  >
                     <p className="_purple">Copywriting</p>
-                  </div>
-                </div>
-              </div>
-              <button className="form-new__create _hover01" id="btnCreate">
-                Создать задачу
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
+                  </CategoriesTheme>
+                </CategoriesThemes>
+              </PopNewCardCategories>
+              <FormNewCreate id="btnCreate">Создать задачу</FormNewCreate>
+            </PopNewCardContent>
+          </PopNewCardBlock>
+        </PopNewCardContainer>
+      </PopNewCardS>
     </>
   );
 }
