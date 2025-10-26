@@ -3,7 +3,6 @@ import { MainColumn, ColumnTitle, Cards } from "./Column.styled.js";
 
 export function Column({ cards, status }) {
 
-  console.log(cards)
   return (
     <>
       <MainColumn>
