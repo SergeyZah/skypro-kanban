@@ -1,6 +1,6 @@
 import { Calendar } from "../Calendar/calendar";
 import { Link } from "react-router-dom";
-import { CategoriesTheme } from "./PopBrowse.styled";
+import { CategoriesP, CategoriesTheme, FormBrowseArea, FormBrowseBlock, PopBrowseBlock, PopBrowseContainer, PopBrowseContent, PopBrowseForm, PopBrowseS, PopBrowseStatus, PopBrowseStatusSubtitle, PopBrowseTitle, PopBrowseTopBlock, PopBrowseWrap, StatusTheme, StatusThemes, SubTitle, ThemeDownCategories } from "./PopBrowse.styled";
 
 
 export function PopBrowse({task}) {
@@ -10,68 +10,66 @@ export function PopBrowse({task}) {
     Copywriting: "card__theme--purple",
   };
 
-  const ColorTheme = Colors[task.theme];
-  console.log(task.theme)
+  const ColorTheme = Colors[task.topic];
 
   return (
     <>
-      <div className="pop-browse" id="popBrowse">
-        <div className="pop-browse__container">
-          <div className="pop-browse__block">
-            <div className="pop-browse__content">
-              <div className="pop-browse__top-block">
-                <h3 className="pop-browse__ttl">{task.title}</h3>
+      <PopBrowseS id="popBrowse">
+        <PopBrowseContainer>
+          <PopBrowseBlock>
+            <PopBrowseContent>
+              <PopBrowseTopBlock>
+                <PopBrowseTitle>{task.title}</PopBrowseTitle>
                 <CategoriesTheme className={ColorTheme}>
                   <p>{task.theme}</p>
                 </CategoriesTheme>
-              </div>
-              <div className="pop-browse__status status">
-                <p className="status__p subttl">{task.status}</p>
-                <div className="status__themes">
-                  <div className="status__theme _hide">
+              </PopBrowseTopBlock>
+              <PopBrowseStatus>
+                <PopBrowseStatusSubtitle>{task.status}</PopBrowseStatusSubtitle>
+                <StatusThemes>
+                  <StatusTheme className="_hide">
                     <p>Без статуса</p>
-                  </div>
-                  <div className="status__theme _gray">
+                  </StatusTheme>
+                  <StatusTheme className="_gray">
                     <p className="_gray">Нужно сделать</p>
-                  </div>
-                  <div className="status__theme _hide">
+                  </StatusTheme>
+                  <StatusTheme className="_hide">
                     <p>В работе</p>
-                  </div>
-                  <div className="status__theme _hide">
+                  </StatusTheme>
+                  <StatusTheme className="_hide">
                     <p>Тестирование</p>
-                  </div>
-                  <div className="status__theme _hide">
+                  </StatusTheme>
+                  <StatusTheme className="_hide">
                     <p>Готово</p>
-                  </div>
-                </div>
-              </div>
-              <div className="pop-browse__wrap">
-                <form
-                  className="pop-browse__form form-browse"
+                  </StatusTheme>
+                </StatusThemes>
+              </PopBrowseStatus>
+              <PopBrowseWrap>
+                <PopBrowseForm
+                  className="form-browse"
                   id="formBrowseCard"
                   action="#"
                 >
-                  <div className="form-browse__block">
-                    <label htmlFor="textArea01" className="subttl">
+                  <FormBrowseBlock>
+                    <SubTitle htmlFor="textArea01">
                       Описание задачи
-                    </label>
-                    <textarea
-                      className="form-browse__area"
+                    </SubTitle>
+                    <FormBrowseArea
                       name="text"
                       id="textArea01"
                       readOnly
                       placeholder="Введите описание задачи..."
-                    ></textarea>
-                  </div>
-                </form>
+                    ></FormBrowseArea>
+                  </FormBrowseBlock>
+                </PopBrowseForm>
                 <Calendar></Calendar>
-              </div>
-              <div className="theme-down__categories theme-down">
-                <p className="categories__p subttl">Категория</p>
+              </PopBrowseWrap>
+              <ThemeDownCategories>
+                <CategoriesP>Категория</CategoriesP>
                 <div className="categories__theme _orange _active-category">
                   <p className="_orange">Web Design</p>
                 </div>
-              </div>
+              </ThemeDownCategories>
               <div className="pop-browse__btn-browse ">
                 <div className="btn-group">
                   <button className="btn-browse__edit _btn-bor _hover03">
@@ -104,10 +102,10 @@ export function PopBrowse({task}) {
                   <a href="#">Закрыть</a>
                 </button>
               </div>
-            </div>
-          </div>
-        </div>
-      </div>
+            </PopBrowseContent>
+          </PopBrowseBlock>
+        </PopBrowseContainer>
+      </PopBrowseS>
     </>
   );
 }
