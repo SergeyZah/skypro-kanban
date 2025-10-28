@@ -1,16 +1,34 @@
 import { Calendar } from "../Calendar/calendar";
 import { Link } from "react-router-dom";
-import { CategoriesP, CategoriesTheme, FormBrowseArea, FormBrowseBlock, PopBrowseBlock, PopBrowseContainer, PopBrowseContent, PopBrowseForm, PopBrowseS, PopBrowseStatus, PopBrowseStatusSubtitle, PopBrowseTitle, PopBrowseTopBlock, PopBrowseWrap, StatusTheme, StatusThemes, SubTitle, ThemeDownCategories } from "./PopBrowse.styled";
+import {
+  CategoriesP,
+  CategoriesTheme,
+  FormBrowseArea,
+  FormBrowseBlock,
+  PopBrowseBlock,
+  PopBrowseContainer,
+  PopBrowseContent,
+  PopBrowseForm,
+  PopBrowseS,
+  PopBrowseStatus,
+  PopBrowseStatusSubtitle,
+  PopBrowseTitle,
+  PopBrowseTopBlock,
+  PopBrowseWrap,
+  StatusTheme,
+  StatusThemes,
+  SubTitle,
+  ThemeDownCategories,
+} from "./PopBrowse.styled";
 
-
-export function PopBrowse({task}) {
+export function PopBrowse({ task }) {
   const Colors = {
     "Web Design": "card__theme--orange",
     Research: "card__theme--green",
     Copywriting: "card__theme--purple",
   };
 
-  const ColorTheme = Colors[task.topic];
+  const ColorTheme = Colors[task.theme];
 
   return (
     <>
@@ -51,9 +69,7 @@ export function PopBrowse({task}) {
                   action="#"
                 >
                   <FormBrowseBlock>
-                    <SubTitle htmlFor="textArea01">
-                      Описание задачи
-                    </SubTitle>
+                    <SubTitle htmlFor="textArea01">Описание задачи</SubTitle>
                     <FormBrowseArea
                       name="text"
                       id="textArea01"

@@ -26,6 +26,16 @@ export function PopNewCard() {
   const [category, setCategory] = useState("Web Design");
   const navigate = useNavigate();
 
+  // const createTask = async () => {
+  //   const newTask = {
+  //     title: "",
+  //     topic: category,
+  //     status: "Без статуса",
+  //     description: "",
+  //     date: "",
+  //   };
+  // };
+
   const onCloseModal = () => {
     navigate("/");
   };

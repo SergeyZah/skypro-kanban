@@ -20,21 +20,21 @@ export const MainPage = ({ loading }) => {
       } catch (e) {
         console.error("Ошибка парсинга userInfo:", e);
       }
-    } 
+    }
   }, []);
 
-  const getTasks = useCallback( async () => {
+  const getTasks = useCallback(async () => {
     try {
       const data = await fetchTasks({
         token,
-      })
+      });
       if (data) setTasks(data);
     } catch (err) {
       setError(err.message);
-    } 
-  }, [token])
+    }
+  }, [token]);
 
-    useEffect(() => {
+  useEffect(() => {
     if (token) {
       getTasks();
     }
@@ -44,7 +44,7 @@ export const MainPage = ({ loading }) => {
     <>
       <div className="wrapper">
         <Loader loading={loading} />
-        <Content tasks ={tasks} loading={loading} error={error}/>
+        <Content token={token} tasks={tasks} loading={loading} error={error} />
         <Outlet />
       </div>
     </>
