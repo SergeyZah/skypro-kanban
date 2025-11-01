@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   CalendarBlock,
   CalendarCellS,
@@ -16,10 +16,18 @@ import {
   NavActions,
 } from "./Calendar.styled";
 
-export function Calendar({onChange = () => {}}) {
+export function Calendar({ value, onChange = () => {} }) {
   const weekday = ["пн", "вт", "ср", "чт", "пт", "сб", "вс"];
 
-  const [currentDate, setCurrentDate] = useState(new Date());
+  const [currentDate, setCurrentDate] = useState(() =>
+    value ? new Date(value) : new Date()
+  );
+
+  useEffect(() => {
+    if (value) {
+      setCurrentDate(new Date(value));
+    }
+  }, [value]);
 
   const beginningOfMonth = new Date(
     currentDate.getFullYear(),
@@ -60,8 +68,15 @@ export function Calendar({onChange = () => {}}) {
   };
 
   const handleDayClick = (day) => {
-     onChange(day);
+    onChange(day);
   };
+
+  const isSameDay = (d1, d2) =>
+    d1 &&
+    d2 &&
+    d1.getFullYear() === d2.getFullYear() &&
+    d1.getMonth() === d2.getMonth() &&
+    d1.getDate() === d2.getDate();
 
   return (
     <>
@@ -109,7 +124,13 @@ export function Calendar({onChange = () => {}}) {
             <CalendarCells>
               {days.map((day, i) =>
                 day ? (
-                  <CalendarCellS key={i} onClick={() => handleDayClick(day)}>{day.getDate()}</CalendarCellS>
+                  <CalendarCellS
+                    key={i}
+                    onClick={() => handleDayClick(day)}
+                    $isSelected={isSameDay(day, value)}
+                  >
+                    {day.getDate()}
+                  </CalendarCellS>
                 ) : (
                   <EmptyDay key={i} />
                 )
@@ -120,7 +141,9 @@ export function Calendar({onChange = () => {}}) {
           <input type="hidden" id="datepick_value" value="08.09.2023"></input>
           <CalendarPeriod>
             <p className="date-end">
-              Выберите срок исполнения <span className="date-control"></span>.
+              {value
+                ? `Срок исполнения: ${value.toLocaleDateString("ru-RU")}`
+                : "Выберите срок исполнения"}
             </p>
           </CalendarPeriod>
         </CalendarBlock>

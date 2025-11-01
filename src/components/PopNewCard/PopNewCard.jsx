@@ -25,7 +25,7 @@ import { postTask } from "../../services/api";
 import { FetchTaskContext } from "../../context/FetchTaskContext";
 
 export function PopNewCard() {
-  const {getTasks, token} = useContext(FetchTaskContext)
+  const { getTasks, token } = useContext(FetchTaskContext);
   const [category, setCategory] = useState("Web Design");
   const navigate = useNavigate();
   const [selectedDate, setSelectedDate] = useState(null);
@@ -57,7 +57,7 @@ export function PopNewCard() {
 
     try {
       await postTask({ token, task: newTask });
-      getTasks()
+      getTasks();
       closeNewCard();
     } catch (err) {
       console.error("Ошибка при создании задачи:", err);
@@ -71,7 +71,7 @@ export function PopNewCard() {
   const handleDateSelect = (date) => {
     setSelectedDate(date);
     setError("");
-    console.log(error)
+    console.log(error);
   };
 
   return (
@@ -105,7 +105,10 @@ export function PopNewCard() {
                     ></FormNewArea>
                   </FormNewBlock>
                 </PopNewCardForm>
-                <Calendar onChange={handleDateSelect}></Calendar>
+                <Calendar
+                  value={selectedDate}
+                  onChange={handleDateSelect}
+                ></Calendar>
               </PopNewCardWrap>
               <PopNewCardCategories>
                 <PopNewCardCategoriesParagraf>
@@ -138,7 +141,9 @@ export function PopNewCard() {
                   </CategoriesTheme>
                 </CategoriesThemes>
               </PopNewCardCategories>
-              <FormNewCreate id="btnCreate" onClick={createTask}>Создать задачу</FormNewCreate>
+              <FormNewCreate id="btnCreate" onClick={createTask}>
+                Создать задачу
+              </FormNewCreate>
             </PopNewCardContent>
           </PopNewCardBlock>
         </PopNewCardContainer>
