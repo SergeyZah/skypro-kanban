@@ -1,10 +1,8 @@
 import { useCallback, useEffect, useState } from "react";
-import { Content } from "../components/Content";
-import { Loader } from "../components/Loader";
-import { Outlet } from "react-router-dom";
 import { fetchTasks } from "../services/api";
+import { FetchTaskContext } from "./FetchTaskContext";
 
-export const MainPage = ({ loading }) => {
+export const FetchTaskProvider = ({children}) => {
   const [tasks, setTasks] = useState([]);
   const [error, setError] = useState("");
   const [token, setToken] = useState("");
@@ -41,12 +39,8 @@ export const MainPage = ({ loading }) => {
   }, [getTasks, token]);
 
   return (
-    <>
-      <div className="wrapper">
-        <Loader loading={loading} />
-        <Content token={token} tasks={tasks} loading={loading} error={error} />
-        <Outlet />
-      </div>
-    </>
-  );
+      <FetchTaskContext.Provider value={{ tasks, error, token, getTasks }}>
+         {children}
+      </FetchTaskContext.Provider>
+   );
 };

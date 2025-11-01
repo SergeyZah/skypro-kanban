@@ -1,8 +1,11 @@
+import { useContext } from "react";
 import { Column } from "../Column/Column";
-// import { CardList } from "../data";
 import { MainS, Container, MainBlock, MainContent } from "./Main.styled.js";
+import { FetchTaskContext } from "../../context/FetchTaskContext.js";
 
-export const Main = ({tasks, error}) => {
+export const Main = ({ error}) => {
+
+  const {tasks} = useContext(FetchTaskContext)
 
   const COLUMN_TITLES = [
   "Без статуса",

@@ -1,5 +1,7 @@
+import { useState } from "react";
 import {
   CalendarBlock,
+  CalendarCellS,
   CalendarCells,
   CalendarContent,
   CalendarDaysName,
@@ -9,20 +11,74 @@ import {
   CalendarPeriod,
   CalendarSubtitle,
   CalendarWrapper,
+  EmptyDay,
   NavAction,
   NavActions,
 } from "./Calendar.styled";
 
-export function Calendar() {
+export function Calendar({onChange = () => {}}) {
+  const weekday = ["пн", "вт", "ср", "чт", "пт", "сб", "вс"];
+
+  const [currentDate, setCurrentDate] = useState(new Date());
+
+  const beginningOfMonth = new Date(
+    currentDate.getFullYear(),
+    currentDate.getMonth(),
+    1
+  );
+
+  const endOfMonth = new Date(
+    currentDate.getFullYear(),
+    currentDate.getMonth() + 1,
+    0
+  );
+
+  const startDay = (beginningOfMonth.getDay() + 6) % 7;
+  const daysPerMonth = endOfMonth.getDate();
+
+  const days = [];
+
+  for (let i = 0; i < startDay; i++) {
+    days.push(null);
+  }
+  for (let day = 1; day <= daysPerMonth; day++) {
+    days.push(new Date(currentDate.getFullYear(), currentDate.getMonth(), day));
+  }
+
+  const prevMonth = (e) => {
+    e.preventDefault();
+    setCurrentDate(
+      new Date(currentDate.getFullYear(), currentDate.getMonth() - 1, 1)
+    );
+  };
+
+  const nextMonth = (e) => {
+    e.preventDefault();
+    setCurrentDate(
+      new Date(currentDate.getFullYear(), currentDate.getMonth() + 1, 1)
+    );
+  };
+
+  const handleDayClick = (day) => {
+     onChange(day);
+  };
+
   return (
     <>
       <CalendarWrapper>
         <CalendarSubtitle>Даты</CalendarSubtitle>
         <CalendarBlock>
           <CalendarNav>
-            <CalendarMonth>Сентябрь 2023</CalendarMonth>
+            <CalendarMonth>
+              {currentDate
+                .toLocaleString("ru-RU", {
+                  month: "long",
+                  year: "numeric",
+                })
+                .replace(/^./, (str) => str.toUpperCase())}
+            </CalendarMonth>
             <NavActions>
-              <NavAction data-action="prev">
+              <NavAction onClick={prevMonth} data-action="prev">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   width="6"
@@ -32,7 +88,7 @@ export function Calendar() {
                   <path d="M5.72945 1.95273C6.09018 1.62041 6.09018 1.0833 5.72945 0.750969C5.36622 0.416344 4.7754 0.416344 4.41218 0.750969L0.528487 4.32883C-0.176162 4.97799 -0.176162 6.02201 0.528487 6.67117L4.41217 10.249C4.7754 10.5837 5.36622 10.5837 5.72945 10.249C6.09018 9.9167 6.09018 9.37959 5.72945 9.04727L1.87897 5.5L5.72945 1.95273Z" />
                 </svg>
               </NavAction>
-              <NavAction data-action="next">
+              <NavAction onClick={nextMonth} data-action="next">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   width="6"
@@ -46,51 +102,19 @@ export function Calendar() {
           </CalendarNav>
           <CalendarContent>
             <CalendarDaysNames>
-              <CalendarDaysName>пн</CalendarDaysName>
-              <CalendarDaysName>вт</CalendarDaysName>
-              <CalendarDaysName>ср</CalendarDaysName>
-              <CalendarDaysName>чт</CalendarDaysName>
-              <CalendarDaysName>пт</CalendarDaysName>
-              <CalendarDaysName className="-weekend-">сб</CalendarDaysName>
-              <CalendarDaysName className="-weekend-">вс</CalendarDaysName>
+              {weekday.map((day) => (
+                <CalendarDaysName key={day}>{day}</CalendarDaysName>
+              ))}
             </CalendarDaysNames>
-            <CalendarCell>
-              <div className="calendar__cell _other-month">28</div>
-              <div className="calendar__cell _other-month">29</div>
-              <div className="calendar__cell _other-month">30</div>
-              <div className="calendar__cell _cell-day">31</div>
-              <div className="calendar__cell _cell-day">1</div>
-              <div className="calendar__cell _cell-day _weekend">2</div>
-              <div className="calendar__cell _cell-day _weekend">3</div>
-              <div className="calendar__cell _cell-day">4</div>
-              <div className="calendar__cell _cell-day">5</div>
-              <div className="calendar__cell _cell-day ">6</div>
-              <div className="calendar__cell _cell-day">7</div>
-              <div className="calendar__cell _cell-day _current">8</div>
-              <div className="calendar__cell _cell-day _weekend">9</div>
-              <div className="calendar__cell _cell-day _weekend">10</div>
-              <div className="calendar__cell _cell-day">11</div>
-              <div className="calendar__cell _cell-day">12</div>
-              <div className="calendar__cell _cell-day">13</div>
-              <div className="calendar__cell _cell-day">14</div>
-              <div className="calendar__cell _cell-day">15</div>
-              <div className="calendar__cell _cell-day _weekend">16</div>
-              <div className="calendar__cell _cell-day _weekend">17</div>
-              <div className="calendar__cell _cell-day">18</div>
-              <div className="calendar__cell _cell-day">19</div>
-              <div className="calendar__cell _cell-day">20</div>
-              <div className="calendar__cell _cell-day">21</div>
-              <div className="calendar__cell _cell-day">22</div>
-              <div className="calendar__cell _cell-day _weekend">23</div>
-              <div className="calendar__cell _cell-day _weekend">24</div>
-              <div className="calendar__cell _cell-day">25</div>
-              <div className="calendar__cell _cell-day">26</div>
-              <div className="calendar__cell _cell-day">27</div>
-              <div className="calendar__cell _cell-day">28</div>
-              <div className="calendar__cell _cell-day">29</div>
-              <div className="calendar__cell _cell-day _weekend">30</div>
-              <div className="calendar__cell _other-month _weekend">1</div>
-            </CalendarCell>
+            <CalendarCells>
+              {days.map((day, i) =>
+                day ? (
+                  <CalendarCellS key={i} onClick={() => handleDayClick(day)}>{day.getDate()}</CalendarCellS>
+                ) : (
+                  <EmptyDay key={i} />
+                )
+              )}
+            </CalendarCells>
           </CalendarContent>
 
           <input type="hidden" id="datepick_value" value="08.09.2023"></input>

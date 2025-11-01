@@ -91,6 +91,16 @@ export const CalendarCellS = styled.div`
   line-height: 1;
   letter-spacing: -0.2px;
   cursor: pointer;
+
+  &:hover {
+  color: #94a6be;
+  background-color: #eaeef6;
+}
+`;
+
+export const EmptyDay = styled.div`
+  width: 26px;
+  height: 26px;
 `;
 
 export const CalendarPeriod = styled.div`

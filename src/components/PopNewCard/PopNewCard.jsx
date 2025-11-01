@@ -20,25 +20,60 @@ import {
   PopNewCardWrap,
   SubTitle,
 } from "./PopNewCard.styled";
-import { useState } from "react";
+import { useContext, useState } from "react";
+import { postTask } from "../../services/api";
+import { FetchTaskContext } from "../../context/FetchTaskContext";
 
 export function PopNewCard() {
+  const {getTasks, token} = useContext(FetchTaskContext)
   const [category, setCategory] = useState("Web Design");
   const navigate = useNavigate();
+  const [selectedDate, setSelectedDate] = useState(null);
+  const [error, setError] = useState("");
+  const closeNewCard = () => navigate("/");
 
-  // const createTask = async () => {
-  //   const newTask = {
-  //     title: "",
-  //     topic: category,
-  //     status: "Без статуса",
-  //     description: "",
-  //     date: "",
-  //   };
-  // };
+  const [formData, setFormData] = useState({
+    title: "",
+    description: "",
+  });
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({
+      ...formData,
+      [name]: value.trim(),
+    });
+    setError("");
+  };
+
+  const createTask = async () => {
+    const newTask = {
+      title: formData.title,
+      topic: category,
+      status: "Без статуса",
+      description: formData.description,
+      date: selectedDate,
+    };
+
+    try {
+      await postTask({ token, task: newTask });
+      getTasks()
+      closeNewCard();
+    } catch (err) {
+      console.error("Ошибка при создании задачи:", err);
+    }
+  };
 
   const onCloseModal = () => {
     navigate("/");
   };
+
+  const handleDateSelect = (date) => {
+    setSelectedDate(date);
+    setError("");
+    console.log(error)
+  };
+
   return (
     <>
       <PopNewCardS id="popNewCard">
@@ -53,22 +88,24 @@ export function PopNewCard() {
                     <SubTitle htmlFor="formTitle">Название задачи</SubTitle>
                     <FormNewInput
                       type="text"
-                      name="name"
+                      name="title"
                       id="formTitle"
                       placeholder="Введите название задачи..."
                       autoFocus
+                      onChange={handleChange}
                     ></FormNewInput>
                   </FormNewBlock>
                   <FormNewBlock>
                     <SubTitle htmlFor="textArea">Описание задачи</SubTitle>
                     <FormNewArea
-                      name="text"
+                      name="description"
                       id="textArea"
                       placeholder="Введите описание задачи..."
+                      onChange={handleChange}
                     ></FormNewArea>
                   </FormNewBlock>
                 </PopNewCardForm>
-                <Calendar></Calendar>
+                <Calendar onChange={handleDateSelect}></Calendar>
               </PopNewCardWrap>
               <PopNewCardCategories>
                 <PopNewCardCategoriesParagraf>
@@ -101,7 +138,7 @@ export function PopNewCard() {
                   </CategoriesTheme>
                 </CategoriesThemes>
               </PopNewCardCategories>
-              <FormNewCreate id="btnCreate">Создать задачу</FormNewCreate>
+              <FormNewCreate id="btnCreate" onClick={createTask}>Создать задачу</FormNewCreate>
             </PopNewCardContent>
           </PopNewCardBlock>
         </PopNewCardContainer>
