@@ -3,7 +3,7 @@ import { Column } from "../Column/Column";
 import { MainS, Container, MainBlock, MainContent } from "./Main.styled.js";
 import { FetchTaskContext } from "../../context/FetchTaskContext.js";
 
-export const Main = ({ error}) => {
+export const Main = ({ error }) => {
 
   const {tasks} = useContext(FetchTaskContext)
 

@@ -14,7 +14,7 @@ export function Column({ cards, status }) {
             return (
               <Card
                 key={card._id}
-                id={card.id}
+                id={card._id}
                 theme={card.topic}
                 title={card.title}
                 date={card.date}

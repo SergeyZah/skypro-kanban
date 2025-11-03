@@ -61,6 +61,7 @@ export function PopNewCard() {
       closeNewCard();
     } catch (err) {
       console.error("Ошибка при создании задачи:", err);
+      alert("Пожалуйста, заполните все поля")
     }
   };
 

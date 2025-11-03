@@ -68,7 +68,6 @@ export const CategoriesTheme = styled.div`
   padding: 8px 20px;
   border-radius: 24px;
   margin-right: 7px;
-  opacity: 0.4;
 
   &.card__theme--orange {
     background: rgba(255, 228, 194, 1);
@@ -80,7 +79,7 @@ export const CategoriesTheme = styled.div`
   &.card__theme--green {
     background: rgba(180, 253, 209, 1);
     p {
-      color: rgba(6, 177, 110, 1);
+      color: rgba(6, 170, 110, 1);
     }
   }
 
@@ -108,18 +107,21 @@ export const StatusThemes = styled.div`
 `;
 
 export const StatusTheme = styled.div`
+  background-color: ${({ $isActive }) =>
+    $isActive ? "rgba(148, 166, 190)" : "#ffffff"};
   border-radius: 24px;
-  border: 0.7px solid rgba(148, 166, 190, 0.4);
-  color: #94a6be;
+  border: 0.7px solid rgba(148, 166, 190);
+  color: ${({ $isActive }) => ($isActive ? "#ffffff" : "rgba(148, 166, 190)")};
   padding: 11px 14px 10px;
   margin-right: 7px;
   margin-bottom: 7px;
+  cursor: pointer;
 
   p {
-  font-size: 14px;
-  line-height: 1;
-  letter-spacing: -0.14px;
-}
+    font-size: 14px;
+    line-height: 1;
+    letter-spacing: -0.14px;
+  }
 `;
 
 export const PopBrowseWrap = styled.div`
@@ -184,4 +186,125 @@ export const ThemeDownCategoriesTheme = styled.p`
 export const PopBrowseThemeDown = styled.div`
   display: none;
   margin-bottom: 20px;
+`;
+
+export const ButtonGroup = styled.div`
+  display: flex;
+  gap: 12px;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+`;
+
+export const ButtonBrowse = styled.div`
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  width: 100%;
+`;
+
+export const ActionButtons = styled.div`
+  width: 100%;
+  display: flex;
+  gap: 8px;
+`;
+
+export const ButtonBrowseEdit = styled.button`
+  border-radius: 4px;
+  border: 0.7px solid var(--palette-navy-60, #565eef);
+  outline: none;
+  background: transparent;
+  color: #565eef;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 10px;
+  letter-spacing: -1%;
+  text-align: center;
+  padding: 10px 14px;
+
+  &:hover {
+    background-color: #33399b;
+    color: #ffffff;
+  }
+`;
+
+export const ButtonBrowseDelete = styled.button`
+  border-radius: 4px;
+  border: 0.7px solid var(--palette-navy-60, #565eef);
+  outline: none;
+  background: transparent;
+  color: #565eef;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 10px;
+  letter-spacing: -1%;
+  text-align: center;
+  padding: 10px 14px;
+
+  &:hover {
+    background-color: #33399b;
+    color: #ffffff;
+  }
+`;
+
+export const ButtonBrowseClose = styled.button`
+  border-radius: 4px;
+  background: #565eef;
+  border: none;
+  outline: none;
+  color: #ffffff;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 10px;
+  letter-spacing: 0%;
+  text-align: center;
+  padding: 10px 14px;
+
+  &:hover {
+    background-color: #33399b;
+  }
+`;
+
+export const ButtonEdit = styled.div`
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  width: 100%;
+`;
+
+export const ButtonEditSave = styled.button`
+  border-radius: 4px;
+  border: 0.7px solid var(--palette-navy-60, #565eef);
+  outline: none;
+  background: transparent;
+  color: #565eef;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 10px;
+  letter-spacing: -1%;
+  text-align: center;
+  padding: 10px 14px;
+
+  &:hover {
+    background-color: #33399b;
+    color: #ffffff;
+  }
+`;
+
+export const ButtonEditCancel = styled.button`
+  border-radius: 4px;
+  border: 0.7px solid var(--palette-navy-60, #565eef);
+  outline: none;
+  background: transparent;
+  color: #565eef;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 10px;
+  letter-spacing: -1%;
+  text-align: center;
+  padding: 10px 14px;
+
+  &:hover {
+    background-color: #33399b;
+    color: #ffffff;
+  }
 `;
