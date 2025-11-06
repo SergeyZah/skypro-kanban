@@ -56,3 +56,16 @@ export async function deleteTask({ token, id }) {
     throw new Error(error.message);
   }
 }
+
+export async function getOneTask({ id, token }) {
+  try {
+    const data = await axios.get(API_URL + id, {
+      headers: {
+        Authorization: "Bearer " + token,
+      },
+    });
+    return data.data.task;
+  } catch (error) {
+    throw new Error(error.message);
+  }
+}

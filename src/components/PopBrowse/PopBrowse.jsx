@@ -1,5 +1,5 @@
 import { Calendar } from "../Calendar/calendar";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import {
   ActionButtons,
   ButtonBrowse,
@@ -29,14 +29,17 @@ import {
   SubTitle,
   ThemeDownCategories,
 } from "./PopBrowse.styled";
-import { useContext, useState } from "react";
-import { FetchTaskContext } from "../../context/FetchTaskContext";
+import { useCallback, useEffect, useState } from "react";
+import { getOneTask } from "../../services/api";
 
-export function PopBrowse({ id }) {
+export function PopBrowse({ id, token }) {
+
+  const [task, setTask] = useState(null);
   const [selectedDate, setSelectedDate] = useState(null);
   const [error, setError] = useState("");
   const [status, setStatus] = useState("Без статуса");
-  const [editing, setEditing] = useState(true);
+  const [editing, setEditing] = useState(false);
+
   const statuses = [
     "Без статуса",
     "Нужно сделать",
@@ -45,28 +48,30 @@ export function PopBrowse({ id }) {
     "Готово",
   ];
 
-  const { tasks } = useContext(FetchTaskContext);
+  const getTask = useCallback (async () => {
+      try {
+        const data = await getOneTask({
+          token,
+          id,
+        });
+        if (data) setTask(data);
+      } catch (err) {
+        setError(err.message);
+      }
+    }, [token, id]);
+  
+    useEffect(() => {
+      if (token) {
+        getTask();
+      }
+    }, [getTask, token]);
 
-  const task = tasks.find((t) => t._id === id);
+  console.log(task)
 
   const Colors = {
     "Web Design": "card__theme--orange",
     Research: "card__theme--green",
     Copywriting: "card__theme--purple",
-  };
-
-  const [formData, setFormData] = useState({
-    title: "",
-    description: "",
-  });
-
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData({
-      ...formData,
-      [name]: value.trim(),
-    });
-    setError("");
   };
 
   const ColorTheme = Colors[task.topic];
@@ -86,7 +91,12 @@ export function PopBrowse({ id }) {
   const openEditing = (e) => {
     e.preventDefault();
     e.stopPropagation();
-    setEditing(false);
+    setEditing(true);
+  };
+
+  const navigate = useNavigate();
+  const onCloseModal = () => {
+    navigate("/");
   };
 
   return (
@@ -110,6 +120,7 @@ export function PopBrowse({ id }) {
                         key={stat}
                         onClick={() => statusProcessing(stat)}
                         $isActive={stat === status}
+                        disabled={!editing}
                       >
                         <p>{stat}</p>
                       </StatusTheme>
@@ -128,9 +139,10 @@ export function PopBrowse({ id }) {
                     <FormBrowseArea
                       name="text"
                       id="textArea01"
+                      value={task.description}
                       readOnly
                       placeholder="Введите описание задачи..."
-                      onChange={handleChange}
+                      disabled={!editing}
                     ></FormBrowseArea>
                   </FormBrowseBlock>
                 </PopBrowseForm>
@@ -143,14 +155,20 @@ export function PopBrowse({ id }) {
                 <CategoriesP>Категория</CategoriesP>
               </ThemeDownCategories>
               <ButtonGroup>
-                {editing ? (
+                {!editing ? (
                   <>
                     <ButtonBrowse>
                       <ActionButtons>
-                        <ButtonBrowseEdit onClick={openEditing}>Редактировать задачу</ButtonBrowseEdit>
-                        <ButtonBrowseDelete>Удалить задачу</ButtonBrowseDelete>
+                        <ButtonBrowseEdit onClick={openEditing}>
+                          Редактировать задачу
+                        </ButtonBrowseEdit>
+                        <ButtonBrowseDelete>
+                          Удалить задачу
+                        </ButtonBrowseDelete>
                       </ActionButtons>
-                      <ButtonBrowseClose>Закрыть</ButtonBrowseClose>
+                      <ButtonBrowseClose onClick={onCloseModal}>
+                        Закрыть
+                      </ButtonBrowseClose>
                     </ButtonBrowse>
                   </>
                 ) : (
@@ -159,9 +177,15 @@ export function PopBrowse({ id }) {
                       <ActionButtons>
                         <ButtonEditSave>Сохранить</ButtonEditSave>
                         <ButtonEditCancel>Отменить</ButtonEditCancel>
-                        <ButtonBrowseDelete id="btnDelete">Удалить задачу</ButtonBrowseDelete>
+                        <ButtonBrowseDelete
+                          id="btnDelete"
+                        >
+                          Удалить задачу
+                        </ButtonBrowseDelete>
                       </ActionButtons>
-                      <ButtonBrowseClose>Закрыть</ButtonBrowseClose>
+                      <ButtonBrowseClose onClick={onCloseModal}>
+                        Закрыть
+                      </ButtonBrowseClose>
                     </ButtonEdit>
                   </>
                 )}

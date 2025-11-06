@@ -115,7 +115,7 @@ export const StatusTheme = styled.div`
   padding: 11px 14px 10px;
   margin-right: 7px;
   margin-bottom: 7px;
-  cursor: pointer;
+  cursor: ${({ disabled }) => (disabled ? "not-allowed" : "text")};
 
   p {
     font-size: 14px;
@@ -162,6 +162,7 @@ export const FormBrowseArea = styled.textarea`
   letter-spacing: -0.14px;
   margin-top: 14px;
   height: 200px;
+  cursor: ${({ disabled }) => (disabled ? "not-allowed" : "text")};
 `;
 
 export const ThemeDownCategories = styled.div`
