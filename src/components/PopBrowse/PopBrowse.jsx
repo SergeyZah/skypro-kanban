@@ -29,16 +29,20 @@ import {
   SubTitle,
   ThemeDownCategories,
 } from "./PopBrowse.styled";
-import { useCallback, useEffect, useState } from "react";
-import { getOneTask } from "../../services/api";
+import { useCallback, useContext, useEffect, useState } from "react";
+import { deleteTask, getOneTask } from "../../services/api";
+import { FetchTaskContext } from "../../context/FetchTaskContext";
 
 export function PopBrowse({ id, token }) {
 
-  const [task, setTask] = useState(null);
+  const [task, setTask] = useState("");
   const [selectedDate, setSelectedDate] = useState(null);
   const [error, setError] = useState("");
   const [status, setStatus] = useState("Без статуса");
   const [editing, setEditing] = useState(false);
+
+  const { tasks, getTasks } = useContext(FetchTaskContext)
+  const [tasksList, setTasksList] = useState(tasks);
 
   const statuses = [
     "Без статуса",
@@ -66,7 +70,8 @@ export function PopBrowse({ id, token }) {
       }
     }, [getTask, token]);
 
-  console.log(task)
+  if (task === "") {console.log("Нет задачи")}
+  else {console.log(task)}
 
   const Colors = {
     "Web Design": "card__theme--orange",
@@ -97,6 +102,26 @@ export function PopBrowse({ id, token }) {
   const navigate = useNavigate();
   const onCloseModal = () => {
     navigate("/");
+  };
+
+  const handleDelete = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    if (token) {
+      deleteTask({ id, token })
+        .then((updatedTasks) => {
+          setTasksList(updatedTasks);
+          getTasks()
+          navigate('/');
+        })
+        .catch((err) => {
+          if (err.message.includes('Ошибка авторизации')) {
+            navigate('/login');
+          } else {
+            setError(err.message);
+          }
+        });
+    }
   };
 
   return (
@@ -162,7 +187,7 @@ export function PopBrowse({ id, token }) {
                         <ButtonBrowseEdit onClick={openEditing}>
                           Редактировать задачу
                         </ButtonBrowseEdit>
-                        <ButtonBrowseDelete>
+                        <ButtonBrowseDelete onClick={handleDelete}>
                           Удалить задачу
                         </ButtonBrowseDelete>
                       </ActionButtons>
@@ -179,6 +204,7 @@ export function PopBrowse({ id, token }) {
                         <ButtonEditCancel>Отменить</ButtonEditCancel>
                         <ButtonBrowseDelete
                           id="btnDelete"
+                          onClick={handleDelete}
                         >
                           Удалить задачу
                         </ButtonBrowseDelete>
