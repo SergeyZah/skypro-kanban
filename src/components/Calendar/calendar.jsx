@@ -16,8 +16,10 @@ import {
   NavActions,
 } from "./Calendar.styled";
 
-export function Calendar({ value, onChange = () => {} }) {
+export function Calendar({ value, onChange = () => {}, disabled }) {
   const weekday = ["пн", "вт", "ср", "чт", "пт", "сб", "вс"];
+
+  const [hoveredDay, setHoveredDay] = useState(null);
 
   const [currentDate, setCurrentDate] = useState(() =>
     value ? new Date(value) : new Date()
@@ -54,21 +56,25 @@ export function Calendar({ value, onChange = () => {} }) {
   }
 
   const prevMonth = (e) => {
-    e.preventDefault();
-    setCurrentDate(
-      new Date(currentDate.getFullYear(), currentDate.getMonth() - 1, 1)
-    );
+    if (disabled) {
+      e.preventDefault();
+      setCurrentDate(
+        new Date(currentDate.getFullYear(), currentDate.getMonth() - 1, 1)
+      );
+    }
   };
 
   const nextMonth = (e) => {
-    e.preventDefault();
-    setCurrentDate(
-      new Date(currentDate.getFullYear(), currentDate.getMonth() + 1, 1)
-    );
+    if (disabled) {
+      e.preventDefault();
+      setCurrentDate(
+        new Date(currentDate.getFullYear(), currentDate.getMonth() + 1, 1)
+      );
+    }
   };
 
   const handleDayClick = (day) => {
-    onChange(day);
+    if (!disabled && day) onChange(day);
   };
 
   const isSameDay = (d1, d2) =>
@@ -77,6 +83,10 @@ export function Calendar({ value, onChange = () => {} }) {
     d1.getFullYear() === d2.getFullYear() &&
     d1.getMonth() === d2.getMonth() &&
     d1.getDate() === d2.getDate();
+
+    const handleDayHover = (day) => {
+    if (!disabled) setHoveredDay(day);
+  };
 
   return (
     <>
@@ -127,7 +137,9 @@ export function Calendar({ value, onChange = () => {} }) {
                   <CalendarCellS
                     key={i}
                     onClick={() => handleDayClick(day)}
-                    $isSelected={isSameDay(day, value)}
+                    $isSelected={isSameDay(day, currentDate)}
+                    $isHovered={isSameDay(day, hoveredDay)}
+                    onMouseEnter={() => handleDayHover(day)}
                   >
                     {day.getDate()}
                   </CalendarCellS>
@@ -142,7 +154,7 @@ export function Calendar({ value, onChange = () => {} }) {
           <CalendarPeriod>
             <p className="date-end">
               {value
-                ? `Срок исполнения: ${value.toLocaleDateString("ru-RU")}`
+                ? `Срок исполнения: ${currentDate.toLocaleDateString("ru-RU")}`
                 : "Выберите срок исполнения"}
             </p>
           </CalendarPeriod>

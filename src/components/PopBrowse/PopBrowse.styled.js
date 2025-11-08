@@ -67,7 +67,6 @@ export const CategoriesTheme = styled.div`
   height: 30px;
   padding: 8px 20px;
   border-radius: 24px;
-  margin-right: 7px;
 
   &.card__theme--orange {
     background: rgba(255, 228, 194, 1);
@@ -99,23 +98,38 @@ export const PopBrowseStatusSubtitle = styled.p`
   margin-bottom: 14px;
 `;
 
-export const StatusThemes = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-  align-items: flex-start;
-  justify-content: flex-start;
-`;
+export const StatusThemes = styled.div``;
 
 export const StatusTheme = styled.div`
+  max-width: 136px;
+  max-height: 37px;
   background-color: ${({ $isActive }) =>
     $isActive ? "rgba(148, 166, 190)" : "#ffffff"};
   border-radius: 24px;
   border: 0.7px solid rgba(148, 166, 190);
   color: ${({ $isActive }) => ($isActive ? "#ffffff" : "rgba(148, 166, 190)")};
-  padding: 11px 14px 10px;
-  margin-right: 7px;
-  margin-bottom: 7px;
+  padding: 10px 16px 10px;
+  cursor: pointer;
+  text-align: center;
+
+  p {
+    font-size: 14px;
+    line-height: 1;
+    letter-spacing: -0.14px;
+  }
+`;
+
+export const StatusThemeSelected = styled.div`
+  max-width: 136px;
+  max-height: 37px;
+  background-color: ${({ $isActive }) =>
+    $isActive ? "rgba(148, 166, 190)" : "#ffffff"};
+  border-radius: 24px;
+  border: 0.7px solid rgba(148, 166, 190);
+  color: ${({ $isActive }) => ($isActive ? "#ffffff" : "rgba(148, 166, 190)")};
+  padding: 10px 16px 10px;
   cursor: ${({ disabled }) => (disabled ? "not-allowed" : "text")};
+  text-align: center;
 
   p {
     font-size: 14px;
@@ -131,15 +145,15 @@ export const PopBrowseWrap = styled.div`
 `;
 
 export const PopBrowseForm = styled.form`
-  max-width: 370px;
   width: 100%;
   display: block;
   margin-bottom: 20px;
+  display: flex;
+  gap: 21px;
 `;
 
 export const FormBrowseBlock = styled.div`
-  display: flex;
-  flex-direction: column;
+  width: 100%;
 `;
 
 export const SubTitle = styled.label`

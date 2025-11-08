@@ -1,5 +1,5 @@
 import { Calendar } from "../Calendar/calendar";
-import { useNavigate } from "react-router-dom";
+import { Form, useNavigate } from "react-router-dom";
 import {
   ActionButtons,
   ButtonBrowse,
@@ -26,22 +26,23 @@ import {
   PopBrowseWrap,
   StatusTheme,
   StatusThemes,
+  StatusThemeSelected,
   SubTitle,
   ThemeDownCategories,
 } from "./PopBrowse.styled";
 import { useCallback, useContext, useEffect, useState } from "react";
-import { deleteTask, getOneTask } from "../../services/api";
+import { deleteTask, editTask, getOneTask } from "../../services/api";
 import { FetchTaskContext } from "../../context/FetchTaskContext";
 
 export function PopBrowse({ id, token }) {
-
   const [task, setTask] = useState("");
   const [selectedDate, setSelectedDate] = useState(null);
   const [error, setError] = useState("");
   const [status, setStatus] = useState("Без статуса");
   const [editing, setEditing] = useState(false);
+  const [description, setDescription] = useState("");
 
-  const { tasks, getTasks } = useContext(FetchTaskContext)
+  const { tasks, getTasks } = useContext(FetchTaskContext);
   const [tasksList, setTasksList] = useState(tasks);
 
   const statuses = [
@@ -52,26 +53,31 @@ export function PopBrowse({ id, token }) {
     "Готово",
   ];
 
-  const getTask = useCallback (async () => {
-      try {
-        const data = await getOneTask({
-          token,
-          id,
-        });
-        if (data) setTask(data);
-      } catch (err) {
-        setError(err.message);
-      }
-    }, [token, id]);
-  
-    useEffect(() => {
-      if (token) {
-        getTask();
-      }
-    }, [getTask, token]);
+  const getTask = useCallback(async () => {
+    try {
+      const data = await getOneTask({
+        token,
+        id,
+      });
+      if (data) setTask(data);
+      setSelectedDate(data.date);
+      setDescription(data.description)
+    } catch (err) {
+      setError(err.message);
+    }
+  }, [token, id]);
 
-  if (task === "") {console.log("Нет задачи")}
-  else {console.log(task)}
+  useEffect(() => {
+    if (token) {
+      getTask();
+    }
+  }, [getTask, token]);
+
+  // if (task === "") {
+  //   console.log("Нет задачи");
+  // } else {
+  //   console.log(task);
+  // }
 
   const Colors = {
     "Web Design": "card__theme--orange",
@@ -111,17 +117,56 @@ export function PopBrowse({ id, token }) {
       deleteTask({ id, token })
         .then((updatedTasks) => {
           setTasksList(updatedTasks);
-          getTasks()
-          navigate('/');
+          getTasks();
+          navigate("/");
         })
         .catch((err) => {
-          if (err.message.includes('Ошибка авторизации')) {
-            navigate('/login');
+          if (err.message.includes("Ошибка авторизации")) {
+            navigate("/login");
           } else {
             setError(err.message);
           }
         });
     }
+  };
+
+  const handleSave = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+
+    // const updatedTaskData = {
+    //   title: originalTask.title,
+    //   description: description.trim(),
+    //   topic: category,
+    //   date: dueDate.toISOString(),
+    //   status,
+    //   userId: originalTask.userId,
+    // };
+
+    const dataModifiedTask = {
+      title: task.title,
+      topic: task.topic,
+      status: status,
+      description: description,
+      date: selectedDate,
+    };
+
+    editTask({ id, token, task: dataModifiedTask })
+      .then((updatedTasks) => {
+        setTasksList(updatedTasks);
+        setEditing(false);
+        getTasks();
+        navigate("/");
+      })
+      .catch((err) => {
+        setError(err.message);
+      });
+  };
+
+  const handleCancel = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    setEditing(false);
   };
 
   return (
@@ -139,18 +184,27 @@ export function PopBrowse({ id, token }) {
               <PopBrowseStatus>
                 <PopBrowseStatusSubtitle>Статус</PopBrowseStatusSubtitle>
                 <StatusThemes>
-                  {statuses.map((stat) => {
-                    return (
-                      <StatusTheme
-                        key={stat}
-                        onClick={() => statusProcessing(stat)}
-                        $isActive={stat === status}
-                        disabled={!editing}
-                      >
-                        <p>{stat}</p>
-                      </StatusTheme>
-                    );
-                  })}
+                  {editing ? (
+                    <div style={{ display: 'flex', gap: '7px', flexWrap: 'wrap' }}>
+                      {statuses.map((stat) => {
+                        return (
+                          <StatusTheme
+                            key={stat}
+                            onClick={() => statusProcessing(stat)}
+                            $isActive={stat === status}
+                            disabled={!editing}
+                          >
+                            <p>{stat}</p>
+                          </StatusTheme>
+                        );
+                      })}
+                    </div>
+                  ) : (
+                    <StatusThemeSelected
+                      $isActive={true}
+                      disabled={!editing}
+                    ><p>{status}</p></StatusThemeSelected>
+                  )}
                 </StatusThemes>
               </PopBrowseStatus>
               <PopBrowseWrap>
@@ -164,17 +218,18 @@ export function PopBrowse({ id, token }) {
                     <FormBrowseArea
                       name="text"
                       id="textArea01"
-                      value={task.description}
-                      readOnly
+                      value={description}
                       placeholder="Введите описание задачи..."
                       disabled={!editing}
+                      onChange={(e) => editing && setDescription(e.target.value)}
                     ></FormBrowseArea>
                   </FormBrowseBlock>
+                  <Calendar
+                    value={selectedDate}
+                    onChange={handleDateSelect}
+                    disabled={!editing}
+                  ></Calendar>
                 </PopBrowseForm>
-                <Calendar
-                  value={selectedDate}
-                  onChange={handleDateSelect}
-                ></Calendar>
               </PopBrowseWrap>
               <ThemeDownCategories>
                 <CategoriesP>Категория</CategoriesP>
@@ -200,8 +255,12 @@ export function PopBrowse({ id, token }) {
                   <>
                     <ButtonEdit>
                       <ActionButtons>
-                        <ButtonEditSave>Сохранить</ButtonEditSave>
-                        <ButtonEditCancel>Отменить</ButtonEditCancel>
+                        <ButtonEditSave onClick={handleSave}>
+                          Сохранить
+                        </ButtonEditSave>
+                        <ButtonEditCancel onClick={handleCancel}>
+                          Отменить
+                        </ButtonEditCancel>
                         <ButtonBrowseDelete
                           id="btnDelete"
                           onClick={handleDelete}
