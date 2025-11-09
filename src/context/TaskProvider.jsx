@@ -1,8 +1,8 @@
 import { useCallback, useEffect, useState } from "react";
 import { fetchTasks } from "../services/api";
-import { FetchTaskContext } from "./FetchTaskContext";
+import { TaskContext } from "./TaskContext";
 
-export const FetchTaskProvider = ({children}) => {
+export const TaskProvider = ({ children }) => {
   const [tasks, setTasks] = useState([]);
   const [error, setError] = useState("");
   const [token, setToken] = useState("");
@@ -39,8 +39,8 @@ export const FetchTaskProvider = ({children}) => {
   }, [getTasks, token]);
 
   return (
-      <FetchTaskContext.Provider value={{ tasks, error, token, getTasks }}>
-         {children}
-      </FetchTaskContext.Provider>
-   );
+    <TaskContext.Provider value={{ tasks, error, getTasks }}>
+      {children}
+    </TaskContext.Provider>
+  );
 };

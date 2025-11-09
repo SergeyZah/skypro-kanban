@@ -22,14 +22,16 @@ import {
 } from "./PopNewCard.styled";
 import { useContext, useState } from "react";
 import { postTask } from "../../services/api";
-import { FetchTaskContext } from "../../context/FetchTaskContext";
+import { TaskContext } from "../../context/TaskContext";
+import { AuthContext } from "../../context/AuthContext";
 
 export function PopNewCard() {
-  const { getTasks, token } = useContext(FetchTaskContext);
+  const { getTasks } = useContext(TaskContext);
+  const { token } = useContext(AuthContext);
   const [category, setCategory] = useState("Web Design");
-  const navigate = useNavigate();
   const [selectedDate, setSelectedDate] = useState(null);
   const [error, setError] = useState("");
+  const navigate = useNavigate();
   const closeNewCard = () => navigate("/");
 
   const [formData, setFormData] = useState({
@@ -61,7 +63,7 @@ export function PopNewCard() {
       closeNewCard();
     } catch (err) {
       console.error("Ошибка при создании задачи:", err);
-      alert("Пожалуйста, заполните все поля")
+      alert("Пожалуйста, заполните все поля");
     }
   };
 

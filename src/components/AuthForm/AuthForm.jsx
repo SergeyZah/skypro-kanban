@@ -11,9 +11,11 @@ import {
   Wrapper,
 } from "./AuthForm.styled";
 import { signIn, signUp } from "../../services/auth";
-import { useState } from "react";
+import { useContext, useState } from "react";
+import { AuthContext } from "../../context/AuthContext";
 
-export const AuthForm = ({ isSignUp, setIsAuth }) => {
+export const AuthForm = ({ isSignUp }) => {
+  const { setIsAuth } = useContext(AuthContext);
   const navigate = useNavigate();
 
   const [formData, setFormData] = useState({

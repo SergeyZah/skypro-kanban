@@ -1,4 +1,3 @@
-import { useContext, useEffect, useState } from "react";
 import { Route, Routes } from "react-router-dom";
 import { MainPage } from "../pages/Main";
 import { LoginPage } from "../pages/Login";
@@ -8,31 +7,20 @@ import { NotFoundPage } from "../pages/NotFound/NotFound";
 import { CardPage } from "../pages/Card";
 import { ExitPage } from "../pages/Exit";
 import { PrivateRoute } from "./PrivateRoute";
-import { FetchTaskContext } from "../context/FetchTaskContext";
 
 export function AppRoutes() {
-  const [loading, setLoading] = useState(true);
-  const [isAuth, setIsAuth] = useState(() => !!localStorage.getItem("token"));
-
-  useEffect(() => {
-    setTimeout(() => {
-      setLoading(false);
-    }, 1000);
-  }, []);
-
-    const { token } = useContext(FetchTaskContext);
 
   return (
     <Routes>
-      <Route element={<PrivateRoute isAuth={isAuth} />} >
-        <Route path="/" element={<MainPage loading={loading} />}>
+      <Route element={<PrivateRoute/>} >
+        <Route path="/" element={<MainPage/>}>
           <Route path="/card-add" element={<NewCardPage />} />
-          <Route path="/card/:id" element={<CardPage token={token}/>} />
+          <Route path="/card/:id" element={<CardPage/>} />
           <Route path="/exit" element={<ExitPage />} />
         </Route>
       </Route>
-      <Route path="/login" element={<LoginPage setIsAuth={setIsAuth}/>} />
-      <Route path="/register" element={<RegisterPage setIsAuth={setIsAuth}/>} />
+      <Route path="/login" element={<LoginPage/>} />
+      <Route path="/register" element={<RegisterPage/>} />
       <Route path="*" element={<NotFoundPage />} />
     </Routes>
   );
