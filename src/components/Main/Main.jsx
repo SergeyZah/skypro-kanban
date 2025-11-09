@@ -1,8 +1,13 @@
+import { useContext } from "react";
 import { Column } from "../Column/Column";
-import { CardList } from "../data";
 import { MainS, Container, MainBlock, MainContent } from "./Main.styled.js";
+import { FetchTaskContext } from "../../context/FetchTaskContext.js";
 
-const COLUMN_TITLES = [
+export const Main = ({ error }) => {
+
+  const {tasks} = useContext(FetchTaskContext)
+
+  const COLUMN_TITLES = [
   "Без статуса",
   "Нужно сделать",
   "В работе",
@@ -10,7 +15,6 @@ const COLUMN_TITLES = [
   "Готово",
 ];
 
-export function Main() {
   const tasksByStatus = () => {
     const indexed = COLUMN_TITLES.reduce((acc, s) => {
       acc[s] = [];
@@ -18,7 +22,7 @@ export function Main() {
       return acc;
     }, {});
 
-    for (const t of CardList) {
+    for (const t of tasks) {
       const key = COLUMN_TITLES.includes(t.status) ? t.status : "Без статуса";
 
       indexed[key].push(t);
@@ -26,6 +30,8 @@ export function Main() {
 
     return indexed;
   };
+
+  
 
   return (
     <>
@@ -43,6 +49,7 @@ export function Main() {
             </MainContent>
           </MainBlock>
         </Container>
+        <p>{error}</p>
       </MainS>
     </>
   );

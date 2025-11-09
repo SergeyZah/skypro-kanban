@@ -1,23 +1,36 @@
-import { Link } from "react-router-dom";
-import { PopUserSet, PopUserSetButton, PopUserSetMail, PopUserSetName, PopUserSetTheme } from "./PopUser.styled";
+import { useNavigate } from "react-router-dom";
+import {
+  PopUserSet,
+  PopUserSetButton,
+  PopUserSetMail,
+  PopUserSetName,
+  PopUserSetTheme,
+} from "./PopUser.styled";
+import { useState } from "react";
 
-export function PopUser() {
+export function PopUser($isVisible) {
+  const [isVisiblePopUser, setVisiblePopUser] = useState($isVisible);
+  const userInfo = JSON.parse(localStorage.getItem("userInfo"));
+  const userName = userInfo?.name || "Пользователь";
+  const userLogin = userInfo?.login || "Эл. почта";
 
-  return (
+  const navigate = useNavigate();
+  const OpenExit = () => {
+    navigate("/exit");
+    setVisiblePopUser(!$isVisible)
+  };
+
+  return isVisiblePopUser && (
     <>
       <PopUserSet id="user-set-target">
-        <PopUserSetName>Ivan Ivanov</PopUserSetName>
-        <PopUserSetMail>ivan.ivanov@gmail.com</PopUserSetMail>
+        <PopUserSetName>{userName}</PopUserSetName>
+        <PopUserSetMail>{userLogin}</PopUserSetMail>
         <PopUserSetTheme>
           <p>Темная тема</p>
-          <input
-            type="checkbox"
-            className="checkbox"
-            name="checkbox"
-          ></input>
+          <input type="checkbox" className="checkbox" name="checkbox"></input>
         </PopUserSetTheme>
-        <PopUserSetButton type="button" className="_hover03">
-          <Link to="/exit">Выйти</Link>
+        <PopUserSetButton onClick={OpenExit} type="button" className="_hover03">
+          Выйти
         </PopUserSetButton>
       </PopUserSet>
     </>

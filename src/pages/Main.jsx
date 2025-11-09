@@ -3,6 +3,7 @@ import { Loader } from "../components/Loader";
 import { Outlet } from "react-router-dom";
 
 export const MainPage = ({ loading }) => {
+
   return (
     <>
       <div className="wrapper">

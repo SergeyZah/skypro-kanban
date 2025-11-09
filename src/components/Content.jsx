@@ -1,13 +1,13 @@
 import { Header } from "./Header/header";
 import { Main } from "./Main/Main";
 
-export function Content({loading}) {
+export function Content({token, tasks, loading, error}) {
   return !loading && (
     <>
 
-      <Header></Header>
+      <Header token={token}></Header>
 
-      <Main></Main>
+      <Main tasks={tasks} error={error}></Main>
 
     </>
   );

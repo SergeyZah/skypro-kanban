@@ -1,5 +1,5 @@
 import { AuthForm } from "./AuthForm/AuthForm"
 
-export const Register = () => {
-    return <AuthForm isSignUp/>
+export const Register = ({setIsAuth}) => {
+    return <AuthForm setIsAuth={setIsAuth} isSignUp/>
 }
