@@ -1,14 +1,17 @@
+import { useContext } from "react";
 import { Header } from "./Header/header";
 import { Main } from "./Main/Main";
+import { AuthContext } from "../context/AuthContext";
 
-export function Content({token, tasks, loading, error}) {
-  return !loading && (
-    <>
+export function Content({ error }) {
+  const { loading } = useContext(AuthContext);
+  return (
+    !loading && (
+      <>
+        <Header />
 
-      <Header token={token}></Header>
-
-      <Main tasks={tasks} error={error}></Main>
-
-    </>
+        <Main error={error} />
+      </>
+    )
   );
 }

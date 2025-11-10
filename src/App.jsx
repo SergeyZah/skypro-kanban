@@ -1,11 +1,14 @@
 import "./App.css";
 import { AppRoutes } from "./components/AppRoutes";
-import { FetchTaskProvider } from "./context/FetchTaskProvider";
+import { AuthProvider } from "./context/AuthProvider";
+import { TaskProvider } from "./context/TaskProvider";
 
 export function App() {
   return (
-    <FetchTaskProvider>
-      <AppRoutes />
-    </FetchTaskProvider>
+    <AuthProvider>
+      <TaskProvider>
+        <AppRoutes />
+      </TaskProvider>
+    </AuthProvider>
   );
 }

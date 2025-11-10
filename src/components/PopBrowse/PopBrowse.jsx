@@ -1,5 +1,5 @@
 import { Calendar } from "../Calendar/calendar";
-import { Form, useNavigate } from "react-router-dom";
+import { Form, useNavigate, useParams } from "react-router-dom";
 import {
   ActionButtons,
   ButtonBrowse,
@@ -32,17 +32,20 @@ import {
 } from "./PopBrowse.styled";
 import { useCallback, useContext, useEffect, useState } from "react";
 import { deleteTask, editTask, getOneTask } from "../../services/api";
-import { FetchTaskContext } from "../../context/FetchTaskContext";
+import { TaskContext } from "../../context/TaskContext";
+import { AuthContext } from "../../context/AuthContext";
 
-export function PopBrowse({ id, token }) {
+export function PopBrowse() {
+  const { id } = useParams();
   const [task, setTask] = useState("");
   const [selectedDate, setSelectedDate] = useState(null);
   const [error, setError] = useState("");
   const [status, setStatus] = useState("Без статуса");
   const [editing, setEditing] = useState(false);
   const [description, setDescription] = useState("");
+  const { token } = useContext(AuthContext);
 
-  const { tasks, getTasks } = useContext(FetchTaskContext);
+  const { tasks, getTasks } = useContext(TaskContext);
   const [tasksList, setTasksList] = useState(tasks);
 
   const statuses = [
@@ -61,7 +64,7 @@ export function PopBrowse({ id, token }) {
       });
       if (data) setTask(data);
       setSelectedDate(data.date);
-      setDescription(data.description)
+      setDescription(data.description);
     } catch (err) {
       setError(err.message);
     }
@@ -72,12 +75,6 @@ export function PopBrowse({ id, token }) {
       getTask();
     }
   }, [getTask, token]);
-
-  // if (task === "") {
-  //   console.log("Нет задачи");
-  // } else {
-  //   console.log(task);
-  // }
 
   const Colors = {
     "Web Design": "card__theme--orange",
@@ -117,7 +114,7 @@ export function PopBrowse({ id, token }) {
       deleteTask({ id, token })
         .then((updatedTasks) => {
           setTasksList(updatedTasks);
-          getTasks();
+          if (tasksList) {getTasks()}
           navigate("/");
         })
         .catch((err) => {
@@ -133,15 +130,6 @@ export function PopBrowse({ id, token }) {
   const handleSave = (e) => {
     e.preventDefault();
     e.stopPropagation();
-
-    // const updatedTaskData = {
-    //   title: originalTask.title,
-    //   description: description.trim(),
-    //   topic: category,
-    //   date: dueDate.toISOString(),
-    //   status,
-    //   userId: originalTask.userId,
-    // };
 
     const dataModifiedTask = {
       title: task.title,
@@ -185,7 +173,9 @@ export function PopBrowse({ id, token }) {
                 <PopBrowseStatusSubtitle>Статус</PopBrowseStatusSubtitle>
                 <StatusThemes>
                   {editing ? (
-                    <div style={{ display: 'flex', gap: '7px', flexWrap: 'wrap' }}>
+                    <div
+                      style={{ display: "flex", gap: "7px", flexWrap: "wrap" }}
+                    >
                       {statuses.map((stat) => {
                         return (
                           <StatusTheme
@@ -200,10 +190,9 @@ export function PopBrowse({ id, token }) {
                       })}
                     </div>
                   ) : (
-                    <StatusThemeSelected
-                      $isActive={true}
-                      disabled={!editing}
-                    ><p>{status}</p></StatusThemeSelected>
+                    <StatusThemeSelected $isActive={true} disabled={!editing}>
+                      <p>{status}</p>
+                    </StatusThemeSelected>
                   )}
                 </StatusThemes>
               </PopBrowseStatus>
@@ -221,7 +210,9 @@ export function PopBrowse({ id, token }) {
                       value={description}
                       placeholder="Введите описание задачи..."
                       disabled={!editing}
-                      onChange={(e) => editing && setDescription(e.target.value)}
+                      onChange={(e) =>
+                        editing && setDescription(e.target.value)
+                      }
                     ></FormBrowseArea>
                   </FormBrowseBlock>
                   <Calendar

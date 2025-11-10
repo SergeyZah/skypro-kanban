@@ -1,19 +1,18 @@
 import { useContext } from "react";
 import { Column } from "../Column/Column";
 import { MainS, Container, MainBlock, MainContent } from "./Main.styled.js";
-import { FetchTaskContext } from "../../context/FetchTaskContext.js";
+import { TaskContext } from "../../context/TaskContext.js";
 
 export const Main = ({ error }) => {
-
-  const {tasks} = useContext(FetchTaskContext)
+  const { tasks } = useContext(TaskContext);
 
   const COLUMN_TITLES = [
-  "Без статуса",
-  "Нужно сделать",
-  "В работе",
-  "Тестирование",
-  "Готово",
-];
+    "Без статуса",
+    "Нужно сделать",
+    "В работе",
+    "Тестирование",
+    "Готово",
+  ];
 
   const tasksByStatus = () => {
     const indexed = COLUMN_TITLES.reduce((acc, s) => {
@@ -30,8 +29,6 @@ export const Main = ({ error }) => {
 
     return indexed;
   };
-
-  
 
   return (
     <>
@@ -53,4 +50,4 @@ export const Main = ({ error }) => {
       </MainS>
     </>
   );
-}
+};
