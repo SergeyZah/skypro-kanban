@@ -6,7 +6,8 @@ import {
   PopUserSetName,
   PopUserSetTheme,
 } from "./PopUser.styled";
-import { useState } from "react";
+import { useContext, useState } from "react";
+import { TaskContext } from "../../context/TaskContext";
 
 export function PopUser($isVisible) {
   const [isVisiblePopUser, setVisiblePopUser] = useState($isVisible);
@@ -14,22 +15,31 @@ export function PopUser($isVisible) {
   const userName = userInfo?.name || "Пользователь";
   const userLogin = userInfo?.login || "Эл. почта";
 
+  const { isDarkTheme, setIsDarkTheme} = useContext(TaskContext)
+
   const navigate = useNavigate();
   const OpenExit = () => {
     navigate("/exit");
     setVisiblePopUser(!$isVisible)
   };
 
+  const handleDarkTheme = () => {
+    if (!isDarkTheme) setIsDarkTheme(true)
+      else setIsDarkTheme(false)
+  }
+
+  console.log(isDarkTheme)
+
   return isVisiblePopUser && (
     <>
-      <PopUserSet id="user-set-target">
-        <PopUserSetName>{userName}</PopUserSetName>
-        <PopUserSetMail>{userLogin}</PopUserSetMail>
-        <PopUserSetTheme>
+      <PopUserSet isDarkTheme={isDarkTheme} id="user-set-target">
+        <PopUserSetName isDarkTheme={isDarkTheme}>{userName}</PopUserSetName>
+        <PopUserSetMail isDarkTheme={isDarkTheme}>{userLogin}</PopUserSetMail>
+        <PopUserSetTheme isDarkTheme={isDarkTheme} onClick={handleDarkTheme}>
           <p>Темная тема</p>
           <input type="checkbox" className="checkbox" name="checkbox"></input>
         </PopUserSetTheme>
-        <PopUserSetButton onClick={OpenExit} type="button" className="_hover03">
+        <PopUserSetButton isDarkTheme={isDarkTheme} onClick={OpenExit} type="button" className="_hover03">
           Выйти
         </PopUserSetButton>
       </PopUserSet>
