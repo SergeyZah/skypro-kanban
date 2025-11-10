@@ -6,6 +6,7 @@ export const TaskProvider = ({ children }) => {
   const [tasks, setTasks] = useState([]);
   const [error, setError] = useState("");
   const [token, setToken] = useState("");
+  const [isDarkTheme, setIsDarkTheme] = useState(false)
 
   useEffect(() => {
     const storedUserInfo = localStorage.getItem("userInfo");
@@ -39,7 +40,7 @@ export const TaskProvider = ({ children }) => {
   }, [getTasks, token]);
 
   return (
-    <TaskContext.Provider value={{ tasks, error, getTasks }}>
+    <TaskContext.Provider value={{ tasks, error, getTasks, isDarkTheme, setIsDarkTheme }}>
       {children}
     </TaskContext.Provider>
   );
