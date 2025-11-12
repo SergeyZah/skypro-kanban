@@ -22,3 +22,13 @@ export const NotFoundText = styled.p`
   font-size: 1.5em;
   color: #000000;
 `;
+
+export const NotFoundLink = styled.p`
+  font-size: 1em;
+  color: #000000;
+
+  &:hover {
+    color: #33399b;
+    cursor: pointer;
+  }
+`;

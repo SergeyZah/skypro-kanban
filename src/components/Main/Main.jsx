@@ -1,6 +1,12 @@
 import { useContext } from "react";
 import { Column } from "../Column/Column";
-import { MainS, Container, MainBlock, MainContent } from "./Main.styled.js";
+import {
+  MainS,
+  Container,
+  MainBlock,
+  MainContent,
+  MainNull,
+} from "./Main.styled.js";
 import { TaskContext } from "../../context/TaskContext.js";
 
 export const Main = ({ error }) => {
@@ -36,13 +42,17 @@ export const Main = ({ error }) => {
         <Container>
           <MainBlock>
             <MainContent>
-              {COLUMN_TITLES.map((title) => (
-                <Column
-                  key={title}
-                  cards={tasksByStatus()[title]}
-                  status={title}
-                />
-              ))}
+              {tasks.length === 0 ? (
+                <MainNull>Пока задач нет</MainNull>
+              ) : (
+                COLUMN_TITLES.map((title) => (
+                  <Column
+                    key={title}
+                    cards={tasksByStatus()[title]}
+                    status={title}
+                  />
+                ))
+              )}
             </MainContent>
           </MainBlock>
         </Container>

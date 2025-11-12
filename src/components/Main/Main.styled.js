@@ -32,8 +32,17 @@ export const MainContent = styled.div`
   width: 100%;
   display: flex;
   gap: 19px;
+  justify-content: center;
 
   @media screen and (max-width: 1200px) {
     display: block;
   }
+`;
+
+export const MainNull = styled.div`
+  color: #94a6be;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 1;
+  text-transform: uppercase;
 `;

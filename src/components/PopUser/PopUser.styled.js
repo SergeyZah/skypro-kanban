@@ -9,7 +9,7 @@ export const PopUserSet = styled.div`
   border-radius: 10px;
   border: 0.7px solid rgba(148, 166, 190, 0.4);
   background: ${({ isDarkTheme }) => (isDarkTheme ? "rgba(32, 34, 41, 1)" : "#fff")};
-  box-shadow: 0px 10px 39px 0px rgba(26, 56, 101, 0.21);
+  box-shadow: ${({ isDarkTheme }) => (isDarkTheme ? "0px 10px 39px 0px rgba(148, 166, 190, 0.4);" : "0px 10px 39px 0px rgba(26, 56, 101, 0.21)")};
   padding: 34px;
   text-align: center;
   z-index: 2;
