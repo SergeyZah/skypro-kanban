@@ -11,7 +11,7 @@ const Wrapper = styled.div`
   min-height: 100vh;
   overflow: hidden;
   background: ${({ isDarkTheme }) =>
-    isDarkTheme ? "rgba(21, 20, 25, 1);;" : "rgba(234, 238, 246, 1)"};
+    isDarkTheme ? "rgba(21, 20, 25, 1);" : "rgba(234, 238, 246, 1)"};
 `;
 
 export const MainPage = () => {

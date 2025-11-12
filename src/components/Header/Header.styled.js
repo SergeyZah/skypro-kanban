@@ -3,7 +3,7 @@ import styled from "styled-components";
 export const HeaderS = styled.header`
   width: 100%;
   margin: 0 auto;
-  background-color:${({ isDarkTheme }) => (isDarkTheme ? "rgba(32, 32, 44, 1);" : "#fff")};
+  background-color:${({ isDarkTheme }) => (isDarkTheme ? "rgba(40, 40, 52, 1);" : "#fff")};
 `;
 
 export const HeaderBlock = styled.div`

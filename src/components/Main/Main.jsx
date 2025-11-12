@@ -10,7 +10,7 @@ import {
 import { TaskContext } from "../../context/TaskContext.js";
 
 export const Main = ({ error }) => {
-  const { tasks } = useContext(TaskContext);
+  const { tasks, isDarkTheme } = useContext(TaskContext);
 
   const COLUMN_TITLES = [
     "Без статуса",
@@ -38,7 +38,7 @@ export const Main = ({ error }) => {
 
   return (
     <>
-      <MainS>
+      <MainS isDarkTheme={isDarkTheme}>
         <Container>
           <MainBlock>
             <MainContent>

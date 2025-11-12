@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export const MainS = styled.main`
   width: 100%;
-  background: rgba(234, 238, 246, 1);
+  background: ${({ isDarkTheme }) => (isDarkTheme ? "rgba(21, 20, 25, 1)" : "rgba(234, 238, 246, 1)")};
 `;
 
 export const Container = styled.div`
