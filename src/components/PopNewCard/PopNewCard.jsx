@@ -33,6 +33,7 @@ export function PopNewCard() {
   const [error, setError] = useState("");
   const navigate = useNavigate();
   const closeNewCard = () => navigate("/");
+  const [isDisabled, setIsDisabled] = useState(false);
 
   const [formData, setFormData] = useState({
     title: "",
@@ -49,6 +50,7 @@ export function PopNewCard() {
   };
 
   const createTask = async () => {
+    setIsDisabled(true)
     const newTask = {
       title: formData.title,
       topic: category,
@@ -61,6 +63,7 @@ export function PopNewCard() {
       await postTask({ token, task: newTask });
       getTasks();
       closeNewCard();
+      setIsDisabled(false)
     } catch (err) {
       console.error("Ошибка при создании задачи:", err);
       alert("Пожалуйста, заполните все поля");
@@ -144,7 +147,11 @@ export function PopNewCard() {
                   </CategoriesTheme>
                 </CategoriesThemes>
               </PopNewCardCategories>
-              <FormNewCreate id="btnCreate" onClick={createTask}>
+              <FormNewCreate
+                id="btnCreate"
+                disabled={isDisabled}
+                onClick={createTask}
+              >
                 Создать задачу
               </FormNewCreate>
             </PopNewCardContent>
