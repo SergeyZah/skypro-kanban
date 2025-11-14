@@ -26,12 +26,12 @@ export const PopNewCardContainer = styled.div`
 export const PopNewCardBlock = styled.div`
   display: block;
   margin: 0 auto;
-  background-color: #ffffff;
+  background-color: ${({ $isDarkTheme }) => ($isDarkTheme ? "rgba(40, 40, 52, 1)" : "#fff")};
   max-width: 630px;
   width: 100%;
   padding: 40px 30px 48px;
   border-radius: 10px;
-  border: 0.7px solid #d4dbe5;
+  border: 0.7px solid ${({ $isDarkTheme }) => ($isDarkTheme ? "rgba(78, 85, 102, 1)" : "#d4dbe5")};
   position: relative;
 `;
 
@@ -41,7 +41,7 @@ export const PopNewCardContent = styled.div`
 `;
 
 export const PopNewCardTitle = styled.h3`
-  color: #000;
+  color: ${({ $isDarkTheme }) => ($isDarkTheme ? "#fff" : "#000")};
   font-size: 20px;
   font-weight: 600;
   line-height: 24px;
@@ -79,7 +79,7 @@ export const FormNewBlock = styled.div`
 `;
 
 export const SubTitle = styled.label`
-  color: #000;
+  color: ${({ $isDarkTheme }) => ($isDarkTheme ? "#fff" : "#000")};
   font-size: 14px;
   font-weight: 600;
   line-height: 1;
@@ -151,7 +151,7 @@ export const PopNewCardCategories = styled.div`
 
 export const PopNewCardCategoriesParagraf = styled.p`
   margin-bottom: 14px;
-  color: #000;
+  color: ${({ $isDarkTheme }) => ($isDarkTheme ? "#fff" : "#000")};
   font-size: 14px;
   font-weight: 600;
   line-height: 1;

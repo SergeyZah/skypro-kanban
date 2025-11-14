@@ -14,7 +14,7 @@ import { useNavigate } from "react-router-dom";
 import { TaskContext } from "../../context/TaskContext.js";
 
 export function Header() {
-  const { isDarkTheme } = useContext(TaskContext)
+  const { websiteTheme } = useContext(TaskContext)
   const [isVisiblePopUser, setVisiblePopUser] = useState(false);
   const onClick = () => {
     setVisiblePopUser(!isVisiblePopUser);
@@ -35,12 +35,12 @@ export function Header() {
 
   return (
     <>
-      <HeaderS isDarkTheme={isDarkTheme}>
+      <HeaderS $isDarkTheme={websiteTheme === "dark"}>
         <Container>
           <HeaderBlock>
             <div>
               <a href="" target="_self">
-                <HeaderLogo src={isDarkTheme ? "images/logo_dark.png" :"images/logo.png"} alt="logo" />
+                <HeaderLogo src={(websiteTheme === "dark") ? "images/logo_dark.png" :"images/logo.png"} alt="logo" />
               </a>
             </div>
             <HeaderNav>
@@ -50,7 +50,7 @@ export function Header() {
               >
                 Создать новую задачу
               </HeaderButtonMainNew>
-              <HeaderUser isDarkTheme={isDarkTheme} onClick={onClick}>{userName}</HeaderUser>
+              <HeaderUser $isDarkTheme={websiteTheme === "dark"} onClick={onClick}>{userName}</HeaderUser>
               {isVisiblePopUser && (
                 <PopUserOverlay onClick={closePopUser}>
                   <div onClick={(e) => e.stopPropagation()}>

@@ -9,7 +9,7 @@ export const CardItem = styled.div`
 export const CardsCard = styled.div`
   width: 220px;
   height: 130px;
-  background-color:${({ isDarkTheme }) => (isDarkTheme ? "rgba(40, 40, 52, 1);" : "#fff")};
+  background-color:${({ $isDarkTheme }) => ($isDarkTheme ? "rgba(40, 40, 52, 1);" : "#fff")};
   border-radius: 10px;
   display: flex;
   flex-direction: column;
@@ -92,23 +92,23 @@ export const CardTheme = styled.div`
   border-radius: 18px;
 
   &.card__theme--orange {
-    background-color: ${({ isDarkTheme }) => (isDarkTheme ? "rgba(255, 109, 0, 1)" : "rgba(255, 228, 194, 1)")};
+    background-color: ${({ $isDarkTheme }) => ($isDarkTheme ? "rgba(255, 109, 0, 1)" : "rgba(255, 228, 194, 1)")};
     p {
-      color: ${({ isDarkTheme }) => (isDarkTheme ? "rgba(255, 228, 194, 1)" : "rgba(255, 109, 0, 1)")};
+      color: ${({ $isDarkTheme }) => ($isDarkTheme ? "rgba(255, 228, 194, 1)" : "rgba(255, 109, 0, 1)")};
     }
   }
 
   &.card__theme--green {
-    background-color: ${({ isDarkTheme }) => (isDarkTheme ? "rgba(6, 177, 110, 1)" : "rgba(180, 253, 209, 1)")};
+    background-color: ${({ $isDarkTheme }) => ($isDarkTheme ? "rgba(6, 177, 110, 1)" : "rgba(180, 253, 209, 1)")};
     p {
-      color: ${({ isDarkTheme }) => (isDarkTheme ? "rgba(180, 253, 209, 1)" : "rgba(6, 177, 110, 1)")};
+      color: ${({ $isDarkTheme }) => ($isDarkTheme ? "rgba(180, 253, 209, 1)" : "rgba(6, 177, 110, 1)")};
     }
   }
 
   &.card__theme--purple {
-    background-color: ${({ isDarkTheme }) => (isDarkTheme ? "rgba(154, 72, 241, 1)" : "rgba(233, 212, 255, 1)")};
+    background-color: ${({ $isDarkTheme }) => ($isDarkTheme ? "rgba(154, 72, 241, 1)" : "rgba(233, 212, 255, 1)")};
     p {
-      color: ${({ isDarkTheme }) => (isDarkTheme ? "rgba(233, 212, 255, 1)" : "rgba(154, 72, 241, 1)")};
+      color: ${({ $isDarkTheme }) => ($isDarkTheme ? "rgba(233, 212, 255, 1)" : "rgba(154, 72, 241, 1)")};
     }
   }
 
@@ -123,6 +123,6 @@ export const CardTitle = styled.h3`
   font-size: 14px;
   font-weight: 500;
   line-height: 18px;
-  color: ${({ isDarkTheme }) => (isDarkTheme ? "rgba(255, 255, 255, 1)" : "#000")};
+  color: ${({ $isDarkTheme }) => ($isDarkTheme ? "rgba(255, 255, 255, 1)" : "#000")};
   margin-bottom: 10px;
 `;

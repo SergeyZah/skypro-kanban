@@ -26,7 +26,7 @@ import { TaskContext } from "../../context/TaskContext";
 import { AuthContext } from "../../context/AuthContext";
 
 export function PopNewCard() {
-  const { getTasks } = useContext(TaskContext);
+  const { getTasks, websiteTheme } = useContext(TaskContext);
   const { token } = useContext(AuthContext);
   const [category, setCategory] = useState("Web Design");
   const [selectedDate, setSelectedDate] = useState(null);
@@ -84,14 +84,14 @@ export function PopNewCard() {
     <>
       <PopNewCardS id="popNewCard">
         <PopNewCardContainer>
-          <PopNewCardBlock>
+          <PopNewCardBlock $isDarkTheme={websiteTheme === "dark"}>
             <PopNewCardContent>
-              <PopNewCardTitle>Создание задачи</PopNewCardTitle>
+              <PopNewCardTitle $isDarkTheme={websiteTheme === "dark"}>Создание задачи</PopNewCardTitle>
               <PopNewCardClose onClick={onCloseModal}>&#10006;</PopNewCardClose>
               <PopNewCardWrap>
                 <PopNewCardForm id="formNewCard" action="#">
                   <FormNewBlock>
-                    <SubTitle htmlFor="formTitle">Название задачи</SubTitle>
+                    <SubTitle $isDarkTheme={websiteTheme === "dark"} htmlFor="formTitle">Название задачи</SubTitle>
                     <FormNewInput
                       type="text"
                       name="title"
@@ -102,7 +102,7 @@ export function PopNewCard() {
                     ></FormNewInput>
                   </FormNewBlock>
                   <FormNewBlock>
-                    <SubTitle htmlFor="textArea">Описание задачи</SubTitle>
+                    <SubTitle $isDarkTheme={websiteTheme === "dark"} htmlFor="textArea">Описание задачи</SubTitle>
                     <FormNewArea
                       name="description"
                       id="textArea"
@@ -114,10 +114,10 @@ export function PopNewCard() {
                 <Calendar
                   value={selectedDate}
                   onChange={handleDateSelect}
-                ></Calendar>
+                />
               </PopNewCardWrap>
               <PopNewCardCategories>
-                <PopNewCardCategoriesParagraf>
+                <PopNewCardCategoriesParagraf $isDarkTheme={websiteTheme === "dark"}>
                   Категория
                 </PopNewCardCategoriesParagraf>
                 <CategoriesThemes>

@@ -15,7 +15,7 @@ import { TaskContext } from "../../context/TaskContext";
 export function PopExit() {
   const navigate = useNavigate();
 
-  const { isDarkTheme } = useContext(TaskContext);
+  const { websiteTheme } = useContext(TaskContext);
 
   const YesExit = () => {
     navigate("/login");
@@ -30,8 +30,8 @@ export function PopExit() {
     <>
       <PopExitS id="popExit">
         <PopExitContainer>
-          <PopExitBlock isDarkTheme={isDarkTheme}>
-            <PopExitTitle isDarkTheme={isDarkTheme}>
+          <PopExitBlock $isDarkTheme={websiteTheme === "dark"}>
+            <PopExitTitle $isDarkTheme={websiteTheme === "dark"}>
               <p>Выйти из аккаунта?</p>
             </PopExitTitle>
             <PopExitForm id="formExit" action="#">
@@ -39,7 +39,7 @@ export function PopExit() {
                 <PopExitYes onClick={YesExit} id="exitYes">
                   Да, выйти
                 </PopExitYes>
-                <PopExitNo isDarkTheme={isDarkTheme} onClick={NoExit} id="exitNo">
+                <PopExitNo $isDarkTheme={websiteTheme === "dark"} onClick={NoExit} id="exitNo">
                   Нет, остаться
                 </PopExitNo>
               </PopExitFormGroup>

@@ -15,34 +15,51 @@ export function PopUser($isVisible) {
   const userName = userInfo?.name || "Пользователь";
   const userLogin = userInfo?.login || "Эл. почта";
 
-  const { isDarkTheme, setIsDarkTheme} = useContext(TaskContext)
+  const { isDarkTheme, setIsDarkTheme, websiteTheme } = useContext(TaskContext);
 
   const navigate = useNavigate();
   const OpenExit = () => {
     navigate("/exit");
-    setVisiblePopUser(!$isVisible)
+    setVisiblePopUser(!$isVisible);
   };
 
-  const handleDarkTheme = () => {
-    if (!isDarkTheme) setIsDarkTheme(true)
-      else setIsDarkTheme(false)
-  }
+  const HandleDarkTheme = () => {
+    if (isDarkTheme) {
+      setIsDarkTheme(false);
+    } else {
+      setIsDarkTheme(true);
+    }
+  };
 
-  console.log(isDarkTheme)
-
-  return isVisiblePopUser && (
-    <>
-      <PopUserSet isDarkTheme={isDarkTheme} id="user-set-target">
-        <PopUserSetName isDarkTheme={isDarkTheme}>{userName}</PopUserSetName>
-        <PopUserSetMail isDarkTheme={isDarkTheme}>{userLogin}</PopUserSetMail>
-        <PopUserSetTheme isDarkTheme={isDarkTheme} onClick={handleDarkTheme}>
-          <p>Темная тема</p>
-          <input type="checkbox" className="checkbox" name="checkbox"></input>
-        </PopUserSetTheme>
-        <PopUserSetButton isDarkTheme={isDarkTheme} onClick={OpenExit} type="button" className="_hover03">
-          Выйти
-        </PopUserSetButton>
-      </PopUserSet>
-    </>
+  return (
+    isVisiblePopUser && (
+      <>
+        <PopUserSet $isDarkTheme={websiteTheme === "dark"} id="user-set-target">
+          <PopUserSetName $isDarkTheme={websiteTheme === "dark"}>
+            {userName}
+          </PopUserSetName>
+          <PopUserSetMail $isDarkTheme={websiteTheme === "dark"}>
+            {userLogin}
+          </PopUserSetMail>
+          <PopUserSetTheme $isDarkTheme={websiteTheme === "dark"}>
+            <p>Темная тема</p>
+            <input
+              onClick={HandleDarkTheme}
+              type="checkbox"
+              className="checkbox"
+              name="checkbox"
+            ></input>
+          </PopUserSetTheme>
+          <PopUserSetButton
+            $isDarkTheme={websiteTheme === "dark"}
+            onClick={OpenExit}
+            type="button"
+            className="_hover03"
+          >
+            Выйти
+          </PopUserSetButton>
+        </PopUserSet>
+      </>
+    )
   );
 }

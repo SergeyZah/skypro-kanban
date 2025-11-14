@@ -1,5 +1,5 @@
 import { Calendar } from "../Calendar/calendar";
-import { Form, useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import {
   ActionButtons,
   ButtonBrowse,
@@ -45,7 +45,7 @@ export function PopBrowse() {
   const [description, setDescription] = useState("");
   const { token } = useContext(AuthContext);
 
-  const { tasks, getTasks } = useContext(TaskContext);
+  const { tasks, getTasks, websiteTheme } = useContext(TaskContext);
   const [tasksList, setTasksList] = useState(tasks);
 
   const statuses = [
@@ -114,7 +114,9 @@ export function PopBrowse() {
       deleteTask({ id, token })
         .then((updatedTasks) => {
           setTasksList(updatedTasks);
-          if (tasksList) {getTasks()}
+          if (tasksList) {
+            getTasks();
+          }
           navigate("/");
         })
         .catch((err) => {
@@ -161,16 +163,23 @@ export function PopBrowse() {
     <>
       <PopBrowseS id="popBrowse">
         <PopBrowseContainer>
-          <PopBrowseBlock>
+          <PopBrowseBlock $isDarkTheme={websiteTheme === "dark"}>
             <PopBrowseContent>
               <PopBrowseTopBlock>
-                <PopBrowseTitle>{task.title}</PopBrowseTitle>
-                <CategoriesTheme className={ColorTheme}>
+                <PopBrowseTitle $isDarkTheme={websiteTheme === "dark"}>
+                  {task.title}
+                </PopBrowseTitle>
+                <CategoriesTheme
+                  $isDarkTheme={websiteTheme === "dark"}
+                  className={ColorTheme}
+                >
                   <p>{task.topic}</p>
                 </CategoriesTheme>
               </PopBrowseTopBlock>
               <PopBrowseStatus>
-                <PopBrowseStatusSubtitle>Статус</PopBrowseStatusSubtitle>
+                <PopBrowseStatusSubtitle $isDarkTheme={websiteTheme === "dark"}>
+                  Статус
+                </PopBrowseStatusSubtitle>
                 <StatusThemes>
                   {editing ? (
                     <div
@@ -190,7 +199,7 @@ export function PopBrowse() {
                       })}
                     </div>
                   ) : (
-                    <StatusThemeSelected $isActive={true} disabled={!editing}>
+                    <StatusThemeSelected $isDarkTheme={websiteTheme === "dark"} $isActive={true} disabled={!editing}>
                       <p>{status}</p>
                     </StatusThemeSelected>
                   )}
@@ -203,7 +212,9 @@ export function PopBrowse() {
                   action="#"
                 >
                   <FormBrowseBlock>
-                    <SubTitle htmlFor="textArea01">Описание задачи</SubTitle>
+                    <SubTitle $isDarkTheme={websiteTheme === "dark"} htmlFor="textArea01">
+                      Описание задачи
+                    </SubTitle>
                     <FormBrowseArea
                       name="text"
                       id="textArea01"
@@ -213,13 +224,14 @@ export function PopBrowse() {
                       onChange={(e) =>
                         editing && setDescription(e.target.value)
                       }
+                      $isDarkTheme={websiteTheme === "dark"}
                     ></FormBrowseArea>
                   </FormBrowseBlock>
                   <Calendar
                     value={selectedDate}
                     onChange={handleDateSelect}
                     disabled={!editing}
-                  ></Calendar>
+                  />
                 </PopBrowseForm>
               </PopBrowseWrap>
               <ThemeDownCategories>
@@ -230,14 +242,23 @@ export function PopBrowse() {
                   <>
                     <ButtonBrowse>
                       <ActionButtons>
-                        <ButtonBrowseEdit onClick={openEditing}>
+                        <ButtonBrowseEdit
+                          $isDarkTheme={websiteTheme === "dark"}
+                          onClick={openEditing}
+                        >
                           Редактировать задачу
                         </ButtonBrowseEdit>
-                        <ButtonBrowseDelete onClick={handleDelete}>
+                        <ButtonBrowseDelete
+                          $isDarkTheme={websiteTheme === "dark"}
+                          onClick={handleDelete}
+                        >
                           Удалить задачу
                         </ButtonBrowseDelete>
                       </ActionButtons>
-                      <ButtonBrowseClose onClick={onCloseModal}>
+                      <ButtonBrowseClose
+                        $isDarkTheme={websiteTheme === "dark"}
+                        onClick={onCloseModal}
+                      >
                         Закрыть
                       </ButtonBrowseClose>
                     </ButtonBrowse>
@@ -246,20 +267,30 @@ export function PopBrowse() {
                   <>
                     <ButtonEdit>
                       <ActionButtons>
-                        <ButtonEditSave onClick={handleSave}>
+                        <ButtonEditSave
+                          $isDarkTheme={websiteTheme === "dark"}
+                          onClick={handleSave}
+                        >
                           Сохранить
                         </ButtonEditSave>
-                        <ButtonEditCancel onClick={handleCancel}>
+                        <ButtonEditCancel
+                          $isDarkTheme={websiteTheme === "dark"}
+                          onClick={handleCancel}
+                        >
                           Отменить
                         </ButtonEditCancel>
                         <ButtonBrowseDelete
                           id="btnDelete"
                           onClick={handleDelete}
+                          $isDarkTheme={websiteTheme === "dark"}
                         >
                           Удалить задачу
                         </ButtonBrowseDelete>
                       </ActionButtons>
-                      <ButtonBrowseClose onClick={onCloseModal}>
+                      <ButtonBrowseClose
+                        $isDarkTheme={websiteTheme === "dark"}
+                        onClick={onCloseModal}
+                      >
                         Закрыть
                       </ButtonBrowseClose>
                     </ButtonEdit>

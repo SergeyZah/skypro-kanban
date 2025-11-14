@@ -3,12 +3,17 @@ import styled from "styled-components";
 export const CalendarWrapper = styled.div`
   width: 182px;
   margin-bottom: 20px;
+
+  &:disabled {
+    cursor: not-allowed;
+    opacity: 0.6;
+  }
 `;
 
 export const CalendarSubtitle = styled.p`
   margin-bottom: 14px;
   padding: 0 7px;
-  color: #000;
+  color: ${({ $isDarkTheme }) => ($isDarkTheme ? "#fff" : "#000")};
   font-size: 14px;
   font-weight: 600;
   line-height: 1;
@@ -40,13 +45,20 @@ export const NavActions = styled.div`
   justify-content: space-between;
 `;
 
-export const NavAction = styled.div`
+export const NavAction = styled.button`
   width: 18px;
   height: 25px;
+  background: transparent;
+  border: none;
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
+
+  &:disabled {
+    cursor: not-allowed;
+    opacity: 0.6;
+  }
 `;
 
 export const CalendarContent = styled.div`
@@ -93,9 +105,9 @@ export const CalendarCellS = styled.div`
   cursor: pointer;
 
   &:hover {
-  color: #94a6be;
-  background-color: #eaeef6;
-}
+    color: #94a6be;
+    background-color: #eaeef6;
+  }
 `;
 
 export const EmptyDay = styled.div`

@@ -19,7 +19,7 @@ export function Card({ id, theme, title, date }) {
     Copywriting: "card__theme--purple",
   };
 
-  const { isDarkTheme } = useContext(TaskContext)
+  const { websiteTheme } = useContext(TaskContext)
 
   const ColorTheme = Colors[theme];
 
@@ -43,9 +43,9 @@ export function Card({ id, theme, title, date }) {
   return (
     <>
       <CardItem key={id}>
-        <CardsCard isDarkTheme={isDarkTheme}>
+        <CardsCard $isDarkTheme={websiteTheme === "dark"}>
           <CardGroup>
-            <CardTheme isDarkTheme={isDarkTheme} className={ColorTheme}>
+            <CardTheme $isDarkTheme={websiteTheme === "dark"} className={ColorTheme}>
               <p>{theme}</p>
             </CardTheme>
             <>
@@ -58,7 +58,7 @@ export function Card({ id, theme, title, date }) {
 
           </CardGroup>
           <CardContent>
-              <CardTitle isDarkTheme={isDarkTheme}>{title}</CardTitle>
+              <CardTitle $isDarkTheme={websiteTheme === "dark"}>{title}</CardTitle>
             <CardDate>
               <svg
                 xmlns="http://www.w3.org/2000/svg"

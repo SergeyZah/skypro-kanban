@@ -26,12 +26,12 @@ export const PopExitContainer = styled.div`
 export const PopExitBlock = styled.div`
   display: block;
   margin: 0 auto;
-  background-color: ${({ isDarkTheme }) => (isDarkTheme ? "rgba(40, 40, 52, 1);" : "#fff")};
+  background-color: ${({ $isDarkTheme }) => ($isDarkTheme ? "rgba(40, 40, 52, 1);" : "#fff")};
   max-width: 370px;
   width: 100%;
   padding: 50px 0px;
   border-radius: 10px;
-  border: 0.7px solid ${({ isDarkTheme }) => (isDarkTheme ? "rgba(78, 85, 102, 1)" : "#d4dbe5")};
+  border: 0.7px solid ${({ $isDarkTheme }) => ($isDarkTheme ? "rgba(78, 85, 102, 1)" : "#d4dbe5")};
   box-shadow: 0px 4px 67px -12px rgba(0, 0, 0, 0.13); 
 `;
 
@@ -43,7 +43,7 @@ export const PopExitTitle = styled.div`
     line-height: 30px;
     letter-spacing: -0.4px;
     margin-bottom: 20px;
-    color: ${({ isDarkTheme }) => (isDarkTheme ? "#fff" : "#000")};
+    color: ${({ $isDarkTheme }) => ($isDarkTheme ? "#fff" : "#000")};
   }
 `;
 
@@ -82,7 +82,7 @@ export const PopExitNo = styled.button`
   height: 30px;
   background-color: transparent;
   border-radius: 4px;
-  border: 0.7px solid var(--palette-navy-60, ${({ isDarkTheme }) => (isDarkTheme ? "#fff" : "#565eef")});
+  border: 0.7px solid var(--palette-navy-60, ${({ $isDarkTheme }) => ($isDarkTheme ? "#fff" : "#565eef")});
   outline: none;
   display: flex;
   align-items: center;
@@ -91,7 +91,7 @@ export const PopExitNo = styled.button`
   line-height: 21px;
   font-weight: 500;
   letter-spacing: -0.14px;
-  color: ${({ isDarkTheme }) => (isDarkTheme ? "#fff" : "#33399b")};
+  color: ${({ $isDarkTheme }) => ($isDarkTheme ? "#fff" : "#33399b")};
 
   &:hover {
     background-color: #33399b;

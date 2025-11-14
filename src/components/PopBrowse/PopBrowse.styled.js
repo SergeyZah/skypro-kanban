@@ -26,12 +26,14 @@ export const PopBrowseContainer = styled.div`
 export const PopBrowseBlock = styled.div`
   display: block;
   margin: 0 auto;
-  background-color: #ffffff;
+  background-color: ${({ $isDarkTheme }) =>
+    $isDarkTheme ? "rgba(40, 40, 52, 1)" : "#fff"};
   max-width: 630px;
   width: 100%;
   padding: 40px 30px 38px;
   border-radius: 10px;
-  border: 0.7px solid #d4dbe5;
+  border: 0.7px solid
+    ${({ $isDarkTheme }) => ($isDarkTheme ? "rgba(78, 85, 102, 1)" : "#d4dbe5")};
   position: relative;
 `;
 
@@ -48,7 +50,7 @@ export const PopBrowseTopBlock = styled.div`
 `;
 
 export const PopBrowseTitle = styled.h3`
-  color: #000;
+  color: ${({ $isDarkTheme }) => ($isDarkTheme ? "#fff" : "#000")};
   font-size: 20px;
   font-weight: 600;
   line-height: 24px;
@@ -59,8 +61,6 @@ export const CategoriesTheme = styled.div`
   height: 15px;
   font-size: 14px;
   font-weight: 250;
-  line-height: 14.21px;
-  letter-spacing: 0%;
   text-align: center;
   display: inline-block;
   width: auto;
@@ -69,23 +69,29 @@ export const CategoriesTheme = styled.div`
   border-radius: 24px;
 
   &.card__theme--orange {
-    background: rgba(255, 228, 194, 1);
+    background-color: ${({ $isDarkTheme }) =>
+      $isDarkTheme ? "rgba(255, 109, 0, 1)" : "rgba(255, 228, 194, 1)"};
     p {
-      color: rgba(255, 109, 0, 1);
+      color: ${({ $isDarkTheme }) =>
+        $isDarkTheme ? "rgba(255, 228, 194, 1)" : "rgba(255, 109, 0, 1)"};
     }
   }
 
   &.card__theme--green {
-    background: rgba(180, 253, 209, 1);
+    background-color: ${({ $isDarkTheme }) =>
+      $isDarkTheme ? "rgba(6, 177, 110, 1)" : "rgba(180, 253, 209, 1)"};
     p {
-      color: rgba(6, 170, 110, 1);
+      color: ${({ $isDarkTheme }) =>
+        $isDarkTheme ? "rgba(180, 253, 209, 1)" : "rgba(6, 177, 110, 1)"};
     }
   }
 
   &.card__theme--purple {
-    background: rgba(233, 212, 255, 1);
+    background-color: ${({ $isDarkTheme }) =>
+      $isDarkTheme ? "rgba(154, 72, 241, 1)" : "rgba(233, 212, 255, 1)"};
     p {
-      color: rgba(154, 72, 241, 1);
+      color: ${({ $isDarkTheme }) =>
+        $isDarkTheme ? "rgba(233, 212, 255, 1)" : "rgba(154, 72, 241, 1)"};
     }
   }
 `;
@@ -95,7 +101,9 @@ export const PopBrowseStatus = styled.div`
 `;
 
 export const PopBrowseStatusSubtitle = styled.p`
+  font-weight: 600;
   margin-bottom: 14px;
+  color: ${({ $isDarkTheme }) => ($isDarkTheme ? "#fff" : "#000")};
 `;
 
 export const StatusThemes = styled.div``;
@@ -126,7 +134,7 @@ export const StatusThemeSelected = styled.div`
     $isActive ? "rgba(148, 166, 190)" : "#ffffff"};
   border-radius: 24px;
   border: 0.7px solid rgba(148, 166, 190);
-  color: ${({ $isActive }) => ($isActive ? "#ffffff" : "rgba(148, 166, 190)")};
+  color: ${({ $isActive, $isDarkTheme }) => ($isActive ? ($isDarkTheme ? "rgba(21, 20, 25, 1)" : "#fff") : ($isDarkTheme ? "rgba(148, 166, 190, 1)" : "rgba(148, 166, 190, 1)"))};
   padding: 10px 16px 10px;
   cursor: ${({ disabled }) => (disabled ? "not-allowed" : "text")};
   text-align: center;
@@ -157,7 +165,7 @@ export const FormBrowseBlock = styled.div`
 `;
 
 export const SubTitle = styled.label`
-  color: #000;
+  color: ${({ $isDarkTheme }) => ($isDarkTheme ? "#fff" : "#000")};
   font-size: 14px;
   font-weight: 600;
   line-height: 1;
@@ -168,7 +176,8 @@ export const FormBrowseArea = styled.textarea`
   width: 100%;
   outline: none;
   padding: 14px;
-  background: #eaeef6;
+  background: ${({ $isDarkTheme, disabled }) =>
+    $isDarkTheme ? (disabled ? "rgba(21, 20, 25, 1)" : "rgba(40, 40, 52, 1)") : (disabled ? "rgba(234, 238, 246, 1)" : "#fff")};
   border: 0.7px solid rgba(148, 166, 190, 0.4);
   border-radius: 8px;
   font-size: 14px;
@@ -176,6 +185,7 @@ export const FormBrowseArea = styled.textarea`
   letter-spacing: -0.14px;
   margin-top: 14px;
   height: 200px;
+  color: rgba(148, 166, 190, 1);
   cursor: ${({ disabled }) => (disabled ? "not-allowed" : "text")};
 `;
 
@@ -225,10 +235,16 @@ export const ActionButtons = styled.div`
 
 export const ButtonBrowseEdit = styled.button`
   border-radius: 4px;
-  border: 0.7px solid var(--palette-navy-60, #565eef);
+  border: 0.7px solid
+    var(
+      --palette-navy-60,
+      ${({ $isDarkTheme }) =>
+        $isDarkTheme ? "rgba(255, 255, 255, 1)" : "#565eef"}
+    );
   outline: none;
   background: transparent;
-  color: #565eef;
+  color: ${({ $isDarkTheme }) =>
+    $isDarkTheme ? "rgba(255, 255, 255, 1)" : "#565eef"};
   font-size: 14px;
   font-weight: 500;
   line-height: 10px;
@@ -239,15 +255,22 @@ export const ButtonBrowseEdit = styled.button`
   &:hover {
     background-color: #33399b;
     color: #ffffff;
+    border: 0.7px solid var(--palette-navy-60, #33399b);
   }
 `;
 
 export const ButtonBrowseDelete = styled.button`
   border-radius: 4px;
-  border: 0.7px solid var(--palette-navy-60, #565eef);
+  border: 0.7px solid
+    var(
+      --palette-navy-60,
+      ${({ $isDarkTheme }) =>
+        $isDarkTheme ? "rgba(255, 255, 255, 1)" : "#565eef"}
+    );
   outline: none;
   background: transparent;
-  color: #565eef;
+  color: ${({ $isDarkTheme }) =>
+    $isDarkTheme ? "rgba(255, 255, 255, 1)" : "#565eef"};
   font-size: 14px;
   font-weight: 500;
   line-height: 10px;
@@ -258,6 +281,7 @@ export const ButtonBrowseDelete = styled.button`
   &:hover {
     background-color: #33399b;
     color: #ffffff;
+    border: 0.7px solid var(--palette-navy-60, #33399b);
   }
 `;
 
@@ -288,10 +312,16 @@ export const ButtonEdit = styled.div`
 
 export const ButtonEditSave = styled.button`
   border-radius: 4px;
-  border: 0.7px solid var(--palette-navy-60, #565eef);
+  border: 0.7px solid
+    var(
+      --palette-navy-60,
+      ${({ $isDarkTheme }) =>
+        $isDarkTheme ? "rgba(255, 255, 255, 1)" : "#565eef"}
+    );
   outline: none;
   background: transparent;
-  color: #565eef;
+  color: ${({ $isDarkTheme }) =>
+    $isDarkTheme ? "rgba(255, 255, 255, 1)" : "#565eef"};
   font-size: 14px;
   font-weight: 500;
   line-height: 10px;
@@ -302,15 +332,22 @@ export const ButtonEditSave = styled.button`
   &:hover {
     background-color: #33399b;
     color: #ffffff;
+    border: 0.7px solid var(--palette-navy-60, #33399b);
   }
 `;
 
 export const ButtonEditCancel = styled.button`
   border-radius: 4px;
-  border: 0.7px solid var(--palette-navy-60, #565eef);
+  border: 0.7px solid
+    var(
+      --palette-navy-60,
+      ${({ $isDarkTheme }) =>
+        $isDarkTheme ? "rgba(255, 255, 255, 1)" : "#565eef"}
+    );
   outline: none;
   background: transparent;
-  color: #565eef;
+  color: ${({ $isDarkTheme }) =>
+    $isDarkTheme ? "rgba(255, 255, 255, 1)" : "#565eef"};
   font-size: 14px;
   font-weight: 500;
   line-height: 10px;
@@ -321,5 +358,6 @@ export const ButtonEditCancel = styled.button`
   &:hover {
     background-color: #33399b;
     color: #ffffff;
+    border: 0.7px solid var(--palette-navy-60, #33399b);
   }
 `;

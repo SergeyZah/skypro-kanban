@@ -10,15 +10,15 @@ const Wrapper = styled.div`
   width: 100vw;
   min-height: 100vh;
   overflow: hidden;
-  background: ${({ isDarkTheme }) =>
-    isDarkTheme ? "rgba(21, 20, 25, 1);" : "rgba(234, 238, 246, 1)"};
+  background: ${({ $isDarkTheme }) =>
+    $isDarkTheme ? "rgba(21, 20, 25, 1);" : "rgba(234, 238, 246, 1)"};
 `;
 
 export const MainPage = () => {
-  const { isDarkTheme } = useContext(TaskContext)
+  const { websiteTheme } = useContext(TaskContext)
   return (
     <>
-      <Wrapper isDarkTheme={isDarkTheme}>
+      <Wrapper $isDarkTheme={websiteTheme === "dark"}>
         <Loader />
         <Content />
         <Outlet />
