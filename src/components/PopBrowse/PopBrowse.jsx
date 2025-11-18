@@ -200,7 +200,7 @@ export function PopBrowse() {
                     </div>
                   ) : (
                     <StatusThemeSelected $isDarkTheme={websiteTheme === "dark"} $isActive={true} disabled={!editing}>
-                      <p>{status}</p>
+                      <p>{task.status}</p>
                     </StatusThemeSelected>
                   )}
                 </StatusThemes>

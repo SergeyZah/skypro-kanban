@@ -30,7 +30,7 @@ export const Main = ({ error }) => {
     return indexed;
   };
 
-  return ( 
+  return (
     <>
       <MainS $isDarkTheme={websiteTheme === "dark"}>
         <Container>
