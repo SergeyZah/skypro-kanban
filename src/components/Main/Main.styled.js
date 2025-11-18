@@ -39,7 +39,7 @@ export const MainContent = styled.div`
   }
 `;
 
-export const MainNull = styled.div`
+export const ColumnNull = styled.div`
   color: #94a6be;
   font-size: 16px;
   font-weight: 600;

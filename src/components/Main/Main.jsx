@@ -1,12 +1,6 @@
 import { useContext } from "react";
 import { Column } from "../Column/Column";
-import {
-  MainS,
-  Container,
-  MainBlock,
-  MainContent,
-  MainNull,
-} from "./Main.styled.js";
+import { MainS, Container, MainBlock, MainContent, ColumnNull } from "./Main.styled.js";
 import { TaskContext } from "../../context/TaskContext.js";
 
 export const Main = ({ error }) => {
@@ -36,14 +30,14 @@ export const Main = ({ error }) => {
     return indexed;
   };
 
-  return (
+  return ( 
     <>
       <MainS $isDarkTheme={websiteTheme === "dark"}>
         <Container>
           <MainBlock>
             <MainContent>
               {tasks.length === 0 ? (
-                <MainNull>Пока задач нет</MainNull>
+                <ColumnNull>Пока задач нет</ColumnNull>
               ) : (
                 COLUMN_TITLES.map((title) => (
                   <Column

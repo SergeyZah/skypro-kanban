@@ -1,7 +1,11 @@
+import { useContext } from "react";
 import { Card } from "../Card/Card";
-import { MainColumn, ColumnTitle, Cards } from "./Column.styled.js";
+import { MainColumn, ColumnTitle, Cards} from "./Column.styled.js";
+import { AuthContext } from "../../context/AuthContext.js";
+import { Loader } from "..//Loader/Loader.jsx";
 
 export function Column({ cards, status }) {
+  const { loading } = useContext(AuthContext);
 
   return (
     <>
@@ -10,17 +14,21 @@ export function Column({ cards, status }) {
           <p>{status}</p>
         </ColumnTitle>
         <Cards>
-          {cards.map((card) => {
-            return (
-              <Card
-                key={card._id}
-                id={card._id}
-                theme={card.topic}
-                title={card.title}
-                date={card.date}
-              />
-            );
-          })}
+          {loading ? (
+            <Loader />
+          ) : (
+            cards.map((card) => {
+              return (
+                <Card
+                  key={card._id}
+                  id={card._id}
+                  theme={card.topic}
+                  title={card.title}
+                  date={card.date}
+                />
+              );
+            })
+          )}
         </Cards>
       </MainColumn>
     </>

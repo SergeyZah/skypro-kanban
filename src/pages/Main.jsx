@@ -1,6 +1,5 @@
 import styled from "styled-components";
 import { Content } from "../components/Content";
-import { Loader } from "../components/Loader";
 import { Outlet } from "react-router-dom";
 import { useContext } from "react";
 import { TaskContext } from "../context/TaskContext";
@@ -15,11 +14,10 @@ const Wrapper = styled.div`
 `;
 
 export const MainPage = () => {
-  const { websiteTheme } = useContext(TaskContext)
+  const { websiteTheme } = useContext(TaskContext);
   return (
     <>
       <Wrapper $isDarkTheme={websiteTheme === "dark"}>
-        <Loader />
         <Content />
         <Outlet />
       </Wrapper>
