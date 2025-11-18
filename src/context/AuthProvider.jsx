@@ -8,7 +8,7 @@ export const AuthProvider = ({ children }) => {
   useEffect(() => {
     setTimeout(() => {
       setLoading(false);
-    }, 1500);
+    }, 3000);
   }, []);
   
   useEffect(() => {
