@@ -14,7 +14,7 @@ export function AppRoutes() {
     <Routes>
       <Route element={<PrivateRoute/>} >
         <Route path="/" element={<MainPage/>}>
-          <Route path="/card-add6" element={<NewCardPage />} />
+          <Route path="/card-add" element={<NewCardPage />} />
           <Route path="/card/:id" element={<CardPage/>} />
           <Route path="/exit" element={<ExitPage />} />
         </Route>

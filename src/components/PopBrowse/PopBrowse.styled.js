@@ -6,7 +6,7 @@ export const PopBrowseS = styled.div`
   left: 0;
   width: 100vw;
   height: 100vh;
-  background-color: ${props => props.theme.background}80;
+  background-color: ${(props) => props.theme.background}80;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -51,14 +51,33 @@ export const PopBrowseTopBlock = styled.div`
   margin-bottom: 18px;
 `;
 
-export const PopBrowseTitle = styled.h3`
+export const PopBrowseFormTitle = styled.form`
+  display: block;
+  display: flex;
+`;
+
+export const PopBrowseTitle = styled.textarea`
   color: ${({ $isDarkTheme }) => ($isDarkTheme ? "#fff" : "#000")};
   font-size: 20px;
   font-weight: 600;
   line-height: 24px;
-  width: 434px;
+  max-width: 434px;
   overflow: hidden;
-
+  padding: 10px;
+  cursor: ${({ disabled }) => (disabled ? "not-allowed" : "text")};
+  max-height: 40px;
+  resize: none;
+  border: none;
+  background: ${({ $isDarkTheme, disabled }) =>
+    $isDarkTheme
+      ? disabled
+        ? "rgba(40, 40, 52, 1)"
+        : "rgba(148, 166, 190, 1)"
+      : disabled
+      ? "#fff"
+      : "#fff"};
+  font-family: Roboto;
+  border-radius: 20px;
 `;
 
 export const CategoriesTheme = styled.div`
@@ -139,7 +158,14 @@ export const StatusThemeSelected = styled.div`
     $isActive ? "rgba(148, 166, 190)" : "#ffffff"};
   border-radius: 24px;
   border: 0.7px solid rgba(148, 166, 190);
-  color: ${({ $isActive, $isDarkTheme }) => ($isActive ? ($isDarkTheme ? "rgba(21, 20, 25, 1)" : "#fff") : ($isDarkTheme ? "rgba(148, 166, 190, 1)" : "rgba(148, 166, 190, 1)"))};
+  color: ${({ $isActive, $isDarkTheme }) =>
+    $isActive
+      ? $isDarkTheme
+        ? "rgba(21, 20, 25, 1)"
+        : "#fff"
+      : $isDarkTheme
+      ? "rgba(148, 166, 190, 1)"
+      : "rgba(148, 166, 190, 1)"};
   padding: 10px 16px 10px;
   cursor: ${({ disabled }) => (disabled ? "not-allowed" : "text")};
   text-align: center;
@@ -182,7 +208,13 @@ export const FormBrowseArea = styled.textarea`
   outline: none;
   padding: 14px;
   background: ${({ $isDarkTheme, disabled }) =>
-    $isDarkTheme ? (disabled ? "rgba(21, 20, 25, 1)" : "rgba(40, 40, 52, 1)") : (disabled ? "rgba(234, 238, 246, 1)" : "#fff")};
+    $isDarkTheme
+      ? disabled
+        ? "rgba(21, 20, 25, 1)"
+        : "rgba(40, 40, 52, 1)"
+      : disabled
+      ? "rgba(234, 238, 246, 1)"
+      : "#fff"};
   border: 0.7px solid rgba(148, 166, 190, 0.4);
   border-radius: 8px;
   font-size: 14px;

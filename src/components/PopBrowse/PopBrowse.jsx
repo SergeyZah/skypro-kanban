@@ -18,6 +18,7 @@ import {
   PopBrowseContainer,
   PopBrowseContent,
   PopBrowseForm,
+  PopBrowseFormTitle,
   PopBrowseS,
   PopBrowseStatus,
   PopBrowseStatusSubtitle,
@@ -43,6 +44,7 @@ export function PopBrowse() {
   const [status, setStatus] = useState("Без статуса");
   const [editing, setEditing] = useState(false);
   const [description, setDescription] = useState("");
+  const [title, setTitle] = useState("");
   const { token } = useContext(AuthContext);
 
   const { tasks, getTasks, websiteTheme } = useContext(TaskContext);
@@ -65,6 +67,7 @@ export function PopBrowse() {
       if (data) setTask(data);
       setSelectedDate(data.date);
       setDescription(data.description);
+      setTitle(data.title);
     } catch (err) {
       setError(err.message);
     }
@@ -134,7 +137,7 @@ export function PopBrowse() {
     e.stopPropagation();
 
     const dataModifiedTask = {
-      title: task.title,
+      title: title,
       topic: task.topic,
       status: status,
       description: description,
@@ -166,9 +169,19 @@ export function PopBrowse() {
           <PopBrowseBlock $isDarkTheme={websiteTheme === "dark"}>
             <PopBrowseContent>
               <PopBrowseTopBlock>
-                <PopBrowseTitle $isDarkTheme={websiteTheme === "dark"}>
-                  {task.title}
-                </PopBrowseTitle>
+                <PopBrowseFormTitle
+                  className="form-browse-title"
+                  id="formBrowseCardTitle"
+                  action="#"
+                >
+                  <PopBrowseTitle
+                    name="taskName"
+                    $isDarkTheme={websiteTheme === "dark"}
+                    value={title}
+                    disabled={!editing}
+                    onChange={(e) => editing && setTitle(e.target.value)}
+                  ></PopBrowseTitle>
+                </PopBrowseFormTitle>
                 <CategoriesTheme
                   $isDarkTheme={websiteTheme === "dark"}
                   className={ColorTheme}
@@ -199,7 +212,11 @@ export function PopBrowse() {
                       })}
                     </div>
                   ) : (
-                    <StatusThemeSelected $isDarkTheme={websiteTheme === "dark"} $isActive={true} disabled={!editing}>
+                    <StatusThemeSelected
+                      $isDarkTheme={websiteTheme === "dark"}
+                      $isActive={true}
+                      disabled={!editing}
+                    >
                       <p>{task.status}</p>
                     </StatusThemeSelected>
                   )}
@@ -212,7 +229,10 @@ export function PopBrowse() {
                   action="#"
                 >
                   <FormBrowseBlock>
-                    <SubTitle $isDarkTheme={websiteTheme === "dark"} htmlFor="textArea01">
+                    <SubTitle
+                      $isDarkTheme={websiteTheme === "dark"}
+                      htmlFor="textArea01"
+                    >
                       Описание задачи
                     </SubTitle>
                     <FormBrowseArea
