@@ -19,6 +19,9 @@ export function PopExit() {
 
   const YesExit = () => {
     navigate("/login");
+    localStorage.removeItem("userInfo")
+    localStorage.removeItem("token")
+    localStorage.removeItem("darkTheme")
   };
 
   const NoExit = (e) => {

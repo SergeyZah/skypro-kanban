@@ -10,24 +10,26 @@ export const AuthProvider = ({ children }) => {
       setLoading(false);
     }, 1000);
   }, []);
+
+      const storedUserInfo = localStorage.getItem("token");
   
   useEffect(() => {
-    const storedUserInfo = localStorage.getItem("userInfo");
+
     if (storedUserInfo) {
       try {
-        const parsedUserInfo = JSON.parse(storedUserInfo);
-        if (parsedUserInfo.token) {
-          setToken(parsedUserInfo.token);
+        const UserToken = JSON.parse(storedUserInfo);
+        if (UserToken) {
+          setToken(UserToken);
         }
       } catch (e) {
         console.error("Ошибка парсинга userInfo:", e);
       }
     }
-  }, []);
+  }, [storedUserInfo]);
 
   const [isAuth, setIsAuth] = useState(() => !!localStorage.getItem("token"));
 
   return (
-    <AuthContext.Provider value={{ token, isAuth, setIsAuth, loading }}>{children}</AuthContext.Provider>
+    <AuthContext.Provider value={{ token, setToken, isAuth, setIsAuth, loading }}>{children}</AuthContext.Provider>
   );
 };

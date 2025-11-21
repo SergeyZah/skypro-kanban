@@ -121,6 +121,9 @@ export const CardTheme = styled.div`
 
 export const CardTitle = styled.h3`
   font-size: 14px;
+  width: 194px;
+  text-align: start;
+  overflow: hidden;
   font-weight: 500;
   line-height: 18px;
   color: ${({ $isDarkTheme }) => ($isDarkTheme ? "rgba(255, 255, 255, 1)" : "#000")};

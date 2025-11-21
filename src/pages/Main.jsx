@@ -14,12 +14,18 @@ const Wrapper = styled.div`
 `;
 
 export const MainPage = () => {
-  const { websiteTheme } = useContext(TaskContext);
+  const { websiteTheme, tasks } = useContext(TaskContext);
   return (
     <>
       <Wrapper $isDarkTheme={websiteTheme === "dark"}>
-        <Content />
-        <Outlet />
+        {tasks ? (
+          <>
+            <Content tasks={tasks} />
+            <Outlet />
+          </>
+        ) : (
+          ""
+        )}
       </Wrapper>
     </>
   );

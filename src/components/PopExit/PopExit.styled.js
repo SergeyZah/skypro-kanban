@@ -1,14 +1,16 @@
 import styled from "styled-components";
 
 export const PopExitS = styled.div`
-  width: 100%;
-  height: 100%;
-  min-width: 320px;
-  min-height: 100vh;
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
-  z-index: 5;
+  width: 100vw;
+  height: 100vh;
+  background-color: ${props => props.theme.background}80;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 990;
 `;
 
 export const PopExitContainer = styled.div`
