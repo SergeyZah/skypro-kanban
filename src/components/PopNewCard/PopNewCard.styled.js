@@ -201,3 +201,10 @@ export const FormNewCreate = styled.button`
     background-color: #33399b;
   }
 `;
+
+export const Error = styled.p`
+  color: ${props => props.theme.error || '#ff6666'};
+  text-align: center;
+  font-size: 14px;
+  font-family: "Roboto", sans-serif;
+`;

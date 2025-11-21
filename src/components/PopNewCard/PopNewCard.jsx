@@ -19,6 +19,7 @@ import {
   PopNewCardTitle,
   PopNewCardWrap,
   SubTitle,
+  Error,
 } from "./PopNewCard.styled";
 import { useContext, useState } from "react";
 import { postTask } from "../../services/api";
@@ -49,7 +50,13 @@ export function PopNewCard() {
     setError("");
   };
 
-  const createTask = async () => {
+  const createTask = async (e) => {
+    e.preventDefault();
+    if (!formData.title.trim() || !category || !selectedDate) {
+      setError("Заполните все поля: название, категория, дата");
+      return;
+    }
+
     setIsDisabled(true)
     const newTask = {
       title: formData.title,
@@ -147,6 +154,7 @@ export function PopNewCard() {
                   </CategoriesTheme>
                 </CategoriesThemes>
               </PopNewCardCategories>
+              {error && <Error>{error}</Error>}
               <FormNewCreate
                 id="btnCreate"
                 disabled={isDisabled}
