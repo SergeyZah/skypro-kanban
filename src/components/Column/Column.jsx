@@ -1,6 +1,6 @@
 import { useContext } from "react";
 import { Card } from "../Card/Card";
-import { MainColumn, ColumnTitle, Cards} from "./Column.styled.js";
+import { MainColumn, ColumnTitle, Cards, ColumnNull } from "./Column.styled.js";
 import { AuthContext } from "../../context/AuthContext.js";
 import { Loader } from "..//Loader/Loader.jsx";
 
@@ -16,7 +16,7 @@ export function Column({ cards, status }) {
         <Cards>
           {loading ? (
             <Loader />
-          ) : (
+          ) : cards.length !== 0 ? (
             cards.map((card) => {
               return (
                 <Card
@@ -28,6 +28,8 @@ export function Column({ cards, status }) {
                 />
               );
             })
+          ) : (
+            <ColumnNull>Нет задач</ColumnNull>
           )}
         </Cards>
       </MainColumn>

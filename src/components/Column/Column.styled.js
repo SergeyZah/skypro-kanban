@@ -43,3 +43,12 @@ export const Cards = styled.div`
     overflow-y: auto;
   }
 `;
+
+export const ColumnNull = styled.div`
+  color: #94a6be;
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 1;
+  text-transform: uppercase;
+  text-align: left;
+`;
