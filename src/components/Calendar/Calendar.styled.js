@@ -104,7 +104,32 @@ export const CalendarCellS = styled.div`
   letter-spacing: -0.2px;
   cursor: pointer;
 
+  ${({ $isToday }) =>
+    $isToday &&
+    `
+    font-weight: bold;
+  `}
+
+  ${({ $isSelected }) =>
+    $isSelected &&
+    `
+    background-color: #94A6BE;
+    color: #ffffff;
+  `}
+
+  ${({ $isHovered }) =>
+    $isHovered &&
+    `
+    background-color: #94A6BE;
+    color: #ffffff;
+  `}
+
   &:hover {
+    color: #94a6be;
+    background-color: #eaeef6;
+  }
+
+  &:active {
     color: #94a6be;
     background-color: #eaeef6;
   }
