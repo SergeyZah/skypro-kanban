@@ -1,14 +1,16 @@
 import styled from "styled-components";
 
 export const PopNewCardS = styled.div`
-  width: 100%;
-  min-width: 375px;
-  height: 100%;
-  min-height: 100vh;
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
-  z-index: 6;
+  width: 100vw;
+  height: 100vh;
+  background-color: ${props => props.theme.background}80;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
 `;
 
 export const PopNewCardContainer = styled.div`
@@ -26,12 +28,12 @@ export const PopNewCardContainer = styled.div`
 export const PopNewCardBlock = styled.div`
   display: block;
   margin: 0 auto;
-  background-color: #ffffff;
+  background-color: ${({ $isDarkTheme }) => ($isDarkTheme ? "rgba(40, 40, 52, 1)" : "#fff")};
   max-width: 630px;
   width: 100%;
   padding: 40px 30px 48px;
   border-radius: 10px;
-  border: 0.7px solid #d4dbe5;
+  border: 0.7px solid ${({ $isDarkTheme }) => ($isDarkTheme ? "rgba(78, 85, 102, 1)" : "#d4dbe5")};
   position: relative;
 `;
 
@@ -41,7 +43,7 @@ export const PopNewCardContent = styled.div`
 `;
 
 export const PopNewCardTitle = styled.h3`
-  color: #000;
+  color: ${({ $isDarkTheme }) => ($isDarkTheme ? "#fff" : "#000")};
   font-size: 20px;
   font-weight: 600;
   line-height: 24px;
@@ -79,7 +81,7 @@ export const FormNewBlock = styled.div`
 `;
 
 export const SubTitle = styled.label`
-  color: #000;
+  color: ${({ $isDarkTheme }) => ($isDarkTheme ? "#fff" : "#000")};
   font-size: 14px;
   font-weight: 600;
   line-height: 1;
@@ -151,7 +153,7 @@ export const PopNewCardCategories = styled.div`
 
 export const PopNewCardCategoriesParagraf = styled.p`
   margin-bottom: 14px;
-  color: #000;
+  color: ${({ $isDarkTheme }) => ($isDarkTheme ? "#fff" : "#000")};
   font-size: 14px;
   font-weight: 600;
   line-height: 1;
@@ -198,4 +200,11 @@ export const FormNewCreate = styled.button`
   &:hover {
     background-color: #33399b;
   }
+`;
+
+export const Error = styled.p`
+  color: ${props => props.theme.error || '#ff6666'};
+  text-align: center;
+  font-size: 14px;
+  font-family: "Roboto", sans-serif;
 `;

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { PopUser } from "../PopUser/PopUser";
 import {
   HeaderS,
@@ -11,8 +11,10 @@ import {
 } from "./Header.styled.js";
 import { Container } from "../Main/Main.styled.js";
 import { useNavigate } from "react-router-dom";
+import { TaskContext } from "../../context/TaskContext.js";
 
 export function Header() {
+  const { websiteTheme } = useContext(TaskContext)
   const [isVisiblePopUser, setVisiblePopUser] = useState(false);
   const onClick = () => {
     setVisiblePopUser(!isVisiblePopUser);
@@ -33,17 +35,12 @@ export function Header() {
 
   return (
     <>
-      <HeaderS>
+      <HeaderS $isDarkTheme={websiteTheme === "dark"}>
         <Container>
           <HeaderBlock>
-            <div className="_show _light">
+            <div>
               <a href="" target="_self">
-                <HeaderLogo src="images/logo.png" alt="logo" />
-              </a>
-            </div>
-            <div className="_dark">
-              <a href="" target="_self">
-                <HeaderLogo src="images/logo_dark.png" alt="logo" />
+                <HeaderLogo src={(websiteTheme === "dark") ? "images/logo_dark.png" :"images/logo.png"} alt="logo" />
               </a>
             </div>
             <HeaderNav>
@@ -53,7 +50,7 @@ export function Header() {
               >
                 Создать новую задачу
               </HeaderButtonMainNew>
-              <HeaderUser onClick={onClick}>{userName}</HeaderUser>
+              <HeaderUser $isDarkTheme={websiteTheme === "dark"} onClick={onClick}>{userName}</HeaderUser>
               {isVisiblePopUser && (
                 <PopUserOverlay onClick={closePopUser}>
                   <div onClick={(e) => e.stopPropagation()}>

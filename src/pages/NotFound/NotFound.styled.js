@@ -6,7 +6,7 @@ export const NotFoundContainer = styled.div`
   align-items: center;
   justify-content: center;
   height: 100vh; /* Занимаем всю высоту viewport */
-  background-color: #f7f7f7;
+  background-color:rgba(234, 238, 246, 1);
   color: #333;
   font-family: Arial, sans-serif;
   text-align: center;
@@ -15,10 +15,21 @@ export const NotFoundContainer = styled.div`
 export const NotFoundTitle = styled.h1`
   font-size: 8em;
   margin-bottom: 0.1em;
-  color: #000000;
+  color: rgba(148, 166, 190, 1);
 `;
 
 export const NotFoundText = styled.p`
   font-size: 1.5em;
-  color: #000000;
+  color: rgba(148, 166, 190, 1);
+`;
+
+export const NotFoundLink = styled.p`
+  font-size: 1em;
+  color: rgba(148, 166, 190, 1);
+  text-decoration: underline;
+
+  &:hover {
+    color:rgb(120, 13, 173);
+    cursor: pointer;
+  }
 `;

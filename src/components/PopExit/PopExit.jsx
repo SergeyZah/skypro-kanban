@@ -9,12 +9,19 @@ import {
   PopExitTitle,
   PopExitYes,
 } from "./PopExit.styled";
+import { useContext } from "react";
+import { TaskContext } from "../../context/TaskContext";
 
 export function PopExit() {
   const navigate = useNavigate();
 
+  const { websiteTheme } = useContext(TaskContext);
+
   const YesExit = () => {
     navigate("/login");
+    localStorage.removeItem("userInfo")
+    localStorage.removeItem("token")
+    localStorage.removeItem("darkTheme")
   };
 
   const NoExit = (e) => {
@@ -26,16 +33,16 @@ export function PopExit() {
     <>
       <PopExitS id="popExit">
         <PopExitContainer>
-          <PopExitBlock>
-            <PopExitTitle>
-              <h2>Выйти из аккаунта?</h2>
+          <PopExitBlock $isDarkTheme={websiteTheme === "dark"}>
+            <PopExitTitle $isDarkTheme={websiteTheme === "dark"}>
+              <p>Выйти из аккаунта?</p>
             </PopExitTitle>
             <PopExitForm id="formExit" action="#">
               <PopExitFormGroup>
                 <PopExitYes onClick={YesExit} id="exitYes">
                   Да, выйти
                 </PopExitYes>
-                <PopExitNo onClick={NoExit} id="exitNo">
+                <PopExitNo $isDarkTheme={websiteTheme === "dark"} onClick={NoExit} id="exitNo">
                   Нет, остаться
                 </PopExitNo>
               </PopExitFormGroup>

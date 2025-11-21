@@ -1,14 +1,16 @@
 import styled from "styled-components";
 
 export const PopExitS = styled.div`
-  width: 100%;
-  height: 100%;
-  min-width: 320px;
-  min-height: 100vh;
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
-  z-index: 5;
+  width: 100vw;
+  height: 100vh;
+  background-color: ${props => props.theme.background}80;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 990;
 `;
 
 export const PopExitContainer = styled.div`
@@ -20,19 +22,19 @@ export const PopExitContainer = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  background: rgba(0, 0, 0, 0.4);
+  background: rgba(0, 0, 0, 0.4); 
 `;
 
 export const PopExitBlock = styled.div`
   display: block;
   margin: 0 auto;
-  background-color: #ffffff;
+  background-color: ${({ $isDarkTheme }) => ($isDarkTheme ? "rgba(40, 40, 52, 1);" : "#fff")};
   max-width: 370px;
   width: 100%;
-  padding: 50px 60px;
+  padding: 50px 0px;
   border-radius: 10px;
-  border: 0.7px solid #d4dbe5;
-  box-shadow: 0px 4px 67px -12px rgba(0, 0, 0, 0.13);
+  border: 0.7px solid ${({ $isDarkTheme }) => ($isDarkTheme ? "rgba(78, 85, 102, 1)" : "#d4dbe5")};
+  box-shadow: 0px 4px 67px -12px rgba(0, 0, 0, 0.13); 
 `;
 
 export const PopExitTitle = styled.div`
@@ -43,6 +45,7 @@ export const PopExitTitle = styled.div`
     line-height: 30px;
     letter-spacing: -0.4px;
     margin-bottom: 20px;
+    color: ${({ $isDarkTheme }) => ($isDarkTheme ? "#fff" : "#000")};
   }
 `;
 
@@ -51,8 +54,7 @@ export const PopExitForm = styled.form``;
 export const PopExitFormGroup = styled.div`
   width: 100%;
   display: flex;
-  align-items: center;
-  justify-content: space-between;
+  justify-content: center;
 `;
 
 export const PopExitYes = styled.button`
@@ -82,7 +84,7 @@ export const PopExitNo = styled.button`
   height: 30px;
   background-color: transparent;
   border-radius: 4px;
-  border: 0.7px solid var(--palette-navy-60, #565eef);
+  border: 0.7px solid var(--palette-navy-60, ${({ $isDarkTheme }) => ($isDarkTheme ? "#fff" : "#565eef")});
   outline: none;
   display: flex;
   align-items: center;
@@ -91,10 +93,11 @@ export const PopExitNo = styled.button`
   line-height: 21px;
   font-weight: 500;
   letter-spacing: -0.14px;
-  color:  #33399b;
+  color: ${({ $isDarkTheme }) => ($isDarkTheme ? "#fff" : "#33399b")};
 
   &:hover {
     background-color: #33399b;
     color: rgba(255, 255, 255, 1);
+    border: 0.7px solid var(--palette-navy-60, #33399b);
   }
 `;

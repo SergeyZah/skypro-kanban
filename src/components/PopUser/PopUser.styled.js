@@ -8,15 +8,15 @@ export const PopUserSet = styled.div`
   height: 205px;
   border-radius: 10px;
   border: 0.7px solid rgba(148, 166, 190, 0.4);
-  background: #fff;
-  box-shadow: 0px 10px 39px 0px rgba(26, 56, 101, 0.21);
+  background: ${({ $isDarkTheme }) => ($isDarkTheme ? "rgba(40, 42, 49, 1)" : "#fff")};
+  box-shadow: ${({ $isDarkTheme }) => ($isDarkTheme ? "0px 10px 39px 0px rgba(148, 166, 190, 0.4);" : "0px 10px 39px 0px rgba(26, 56, 101, 0.21)")};
   padding: 34px;
   text-align: center;
   z-index: 2;
 `;
 
 export const PopUserSetName = styled.p`
-  color: #000;
+  color: ${({ $isDarkTheme }) => ($isDarkTheme ? "rgba(255, 255, 255, 1)" : "#000")};
   font-size: 14px;
   font-weight: 500;
   line-height: 21px;
@@ -25,7 +25,7 @@ export const PopUserSetName = styled.p`
 `;
 
 export const PopUserSetMail = styled.p`
-  color: #94a6be;
+  color:${({ $isDarkTheme }) => ($isDarkTheme ? "rgba(148, 166, 190, 1)" : " #94a6be")};
   font-size: 14px;
   line-height: 21px;
   letter-spacing: -0.14px;
@@ -39,7 +39,7 @@ export const PopUserSetTheme = styled.div`
   margin-bottom: 30px;
 
   p {
-    color: #000;
+    color: ${({ $isDarkTheme }) => ($isDarkTheme ? "rgba(255, 255, 255, 1)" : "#000")};
     font-size: 14px;
     line-height: 21px;
     letter-spacing: -0.14px;
@@ -55,32 +55,35 @@ export const PopUserSetTheme = styled.div`
     -webkit-appearance: none;
     -moz-appearance: none;
     appearance: none;
+    cursor: pointer;
   }
 
   input[type="checkbox"]::before {
     content: "";
     position: absolute;
     top: 1px;
-    left: 1px;
+    left: ${({ $isDarkTheme }) => ($isDarkTheme ? "12px" : "1px")};
     width: 11px;
     height: 11px;
     border-radius: 50%;
     background-color: #94a6be;
     transition: 0.5s;
+    cursor: pointer;
   }
 
-  input:checked[type="checkbox"]::before {
+  input:checked[type="checkbox"]::after {
     left: 12px;
   }
+
 `;
 
 export const PopUserSetButton = styled.button`
   width: 72px;
   height: 30px;
   background: transparent;
-  color: #565eef;
+  color: ${({ $isDarkTheme }) => ($isDarkTheme ? "rgba(255, 255, 255, 1)" : "#565eef")};
   border-radius: 4px;
-  border: 1px solid #565eef;
+  border: 1px solid ${({ $isDarkTheme }) => ($isDarkTheme ? "rgba(255, 255, 255, 1)" : "#565eef")};
 
   a {
     color: #565eef;
@@ -88,6 +91,7 @@ export const PopUserSetButton = styled.button`
 
   &&:hover {
   background-color: #33399b;
-  color: #ffffff;
+  color: rgba(255, 255, 255, 1);
+  border: 1px solid ${({ $isDarkTheme }) => ($isDarkTheme ? "#33399b" : "rgba(255, 255, 255, 1)")};
   }
 `;

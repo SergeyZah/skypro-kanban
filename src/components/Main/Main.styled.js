@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export const MainS = styled.main`
   width: 100%;
-  background: rgba(234, 238, 246, 1);
+  background: ${({ $isDarkTheme }) => ($isDarkTheme ? "rgba(21, 20, 25, 1)" : "rgba(234, 238, 246, 1)")};
 `;
 
 export const Container = styled.div`
@@ -32,8 +32,17 @@ export const MainContent = styled.div`
   width: 100%;
   display: flex;
   gap: 19px;
+  justify-content: center;
 
   @media screen and (max-width: 1200px) {
     display: block;
   }
+`;
+
+export const ColumnNull = styled.div`
+  color: #94a6be;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 1;
+  text-transform: uppercase;
 `;

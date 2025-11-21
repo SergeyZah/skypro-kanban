@@ -19,6 +19,7 @@ import {
   PopNewCardTitle,
   PopNewCardWrap,
   SubTitle,
+  Error,
 } from "./PopNewCard.styled";
 import { useContext, useState } from "react";
 import { postTask } from "../../services/api";
@@ -26,13 +27,14 @@ import { TaskContext } from "../../context/TaskContext";
 import { AuthContext } from "../../context/AuthContext";
 
 export function PopNewCard() {
-  const { getTasks } = useContext(TaskContext);
+  const { getTasks, websiteTheme } = useContext(TaskContext);
   const { token } = useContext(AuthContext);
   const [category, setCategory] = useState("Web Design");
   const [selectedDate, setSelectedDate] = useState(null);
   const [error, setError] = useState("");
   const navigate = useNavigate();
   const closeNewCard = () => navigate("/");
+  const [isDisabled, setIsDisabled] = useState(false);
 
   const [formData, setFormData] = useState({
     title: "",
@@ -48,7 +50,14 @@ export function PopNewCard() {
     setError("");
   };
 
-  const createTask = async () => {
+  const createTask = async (e) => {
+    e.preventDefault();
+    if (!formData.title.trim() || !category || !selectedDate) {
+      setError("Заполните все поля: название, категория, дата");
+      return;
+    }
+
+    setIsDisabled(true)
     const newTask = {
       title: formData.title,
       topic: category,
@@ -61,6 +70,7 @@ export function PopNewCard() {
       await postTask({ token, task: newTask });
       getTasks();
       closeNewCard();
+      setIsDisabled(false)
     } catch (err) {
       console.error("Ошибка при создании задачи:", err);
       alert("Пожалуйста, заполните все поля");
@@ -81,14 +91,14 @@ export function PopNewCard() {
     <>
       <PopNewCardS id="popNewCard">
         <PopNewCardContainer>
-          <PopNewCardBlock>
+          <PopNewCardBlock $isDarkTheme={websiteTheme === "dark"}>
             <PopNewCardContent>
-              <PopNewCardTitle>Создание задачи</PopNewCardTitle>
+              <PopNewCardTitle $isDarkTheme={websiteTheme === "dark"}>Создание задачи</PopNewCardTitle>
               <PopNewCardClose onClick={onCloseModal}>&#10006;</PopNewCardClose>
               <PopNewCardWrap>
                 <PopNewCardForm id="formNewCard" action="#">
                   <FormNewBlock>
-                    <SubTitle htmlFor="formTitle">Название задачи</SubTitle>
+                    <SubTitle $isDarkTheme={websiteTheme === "dark"} htmlFor="formTitle">Название задачи</SubTitle>
                     <FormNewInput
                       type="text"
                       name="title"
@@ -99,7 +109,7 @@ export function PopNewCard() {
                     ></FormNewInput>
                   </FormNewBlock>
                   <FormNewBlock>
-                    <SubTitle htmlFor="textArea">Описание задачи</SubTitle>
+                    <SubTitle $isDarkTheme={websiteTheme === "dark"} htmlFor="textArea">Описание задачи</SubTitle>
                     <FormNewArea
                       name="description"
                       id="textArea"
@@ -111,10 +121,10 @@ export function PopNewCard() {
                 <Calendar
                   value={selectedDate}
                   onChange={handleDateSelect}
-                ></Calendar>
+                />
               </PopNewCardWrap>
               <PopNewCardCategories>
-                <PopNewCardCategoriesParagraf>
+                <PopNewCardCategoriesParagraf $isDarkTheme={websiteTheme === "dark"}>
                   Категория
                 </PopNewCardCategoriesParagraf>
                 <CategoriesThemes>
@@ -144,7 +154,12 @@ export function PopNewCard() {
                   </CategoriesTheme>
                 </CategoriesThemes>
               </PopNewCardCategories>
-              <FormNewCreate id="btnCreate" onClick={createTask}>
+              {error && <Error>{error}</Error>}
+              <FormNewCreate
+                id="btnCreate"
+                disabled={isDisabled}
+                onClick={createTask}
+              >
                 Создать задачу
               </FormNewCreate>
             </PopNewCardContent>

@@ -1,10 +1,16 @@
 import { useContext } from "react";
 import { Column } from "../Column/Column";
-import { MainS, Container, MainBlock, MainContent } from "./Main.styled.js";
+import {
+  MainS,
+  Container,
+  MainBlock,
+  MainContent,
+  ColumnNull,
+} from "./Main.styled.js";
 import { TaskContext } from "../../context/TaskContext.js";
 
-export const Main = ({ error }) => {
-  const { tasks } = useContext(TaskContext);
+export const Main = ({ tasks, error }) => {
+  const { websiteTheme } = useContext(TaskContext);
 
   const COLUMN_TITLES = [
     "Без статуса",
@@ -32,17 +38,21 @@ export const Main = ({ error }) => {
 
   return (
     <>
-      <MainS>
+      <MainS $isDarkTheme={websiteTheme === "dark"}>
         <Container>
           <MainBlock>
             <MainContent>
-              {COLUMN_TITLES.map((title) => (
-                <Column
-                  key={title}
-                  cards={tasksByStatus()[title]}
-                  status={title}
-                />
-              ))}
+              {tasks.length !== 0 ? (
+                COLUMN_TITLES.map((title) => (
+                  <Column
+                    key={title}
+                    cards={tasksByStatus()[title]}
+                    status={title}
+                  />
+                ))
+              ) : (
+                <ColumnNull>Пока задач нет</ColumnNull>
+              )}
             </MainContent>
           </MainBlock>
         </Container>

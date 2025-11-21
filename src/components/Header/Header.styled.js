@@ -3,7 +3,7 @@ import styled from "styled-components";
 export const HeaderS = styled.header`
   width: 100%;
   margin: 0 auto;
-  background-color: #ffffff;
+  background-color:${({ $isDarkTheme }) => ($isDarkTheme ? "rgba(40, 40, 52, 1)" : "#fff")};
 `;
 
 export const HeaderBlock = styled.div`
@@ -70,7 +70,7 @@ export const HeaderUser = styled.a`
   justify-content: center;
   font-size: 14px;
   line-height: 20px;
-  color: #565eef;
+  color: ${({ $isDarkTheme }) => ($isDarkTheme ? "#fff" : "#565eef")};
 
   &::after {
     content: "";
@@ -78,8 +78,8 @@ export const HeaderUser = styled.a`
     width: 6px;
     height: 6px;
     border-radius: 1px;
-    border-left: 1.9px solid #565eef;
-    border-bottom: 1.9px solid #565eef;
+    border-left: 1.9px solid ${({ $isDarkTheme }) => ($isDarkTheme ? "#fff" : "#565eef")};
+    border-bottom: 1.9px solid ${({ $isDarkTheme }) => ($isDarkTheme ? "#fff" : "#565eef")};
     transform: rotate(-45deg);
     margin: -6px 0 0 5px;
     padding: 0;

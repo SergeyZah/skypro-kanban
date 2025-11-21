@@ -1,3 +1,4 @@
+import { useContext } from "react";
 import {
   CardItem,
   CardsCard,
@@ -9,6 +10,7 @@ import {
   CardBtn,
 } from "./Card.styled.js";
 import { useNavigate } from "react-router-dom";
+import { TaskContext } from "../../context/TaskContext.js";
 
 export function Card({ id, theme, title, date }) {
   const Colors = {
@@ -16,6 +18,8 @@ export function Card({ id, theme, title, date }) {
     Research: "card__theme--green",
     Copywriting: "card__theme--purple",
   };
+
+  const { websiteTheme } = useContext(TaskContext)
 
   const ColorTheme = Colors[theme];
 
@@ -39,9 +43,9 @@ export function Card({ id, theme, title, date }) {
   return (
     <>
       <CardItem key={id}>
-        <CardsCard>
+        <CardsCard $isDarkTheme={websiteTheme === "dark"}>
           <CardGroup>
-            <CardTheme className={ColorTheme}>
+            <CardTheme $isDarkTheme={websiteTheme === "dark"} className={ColorTheme}>
               <p>{theme}</p>
             </CardTheme>
             <>
@@ -54,9 +58,7 @@ export function Card({ id, theme, title, date }) {
 
           </CardGroup>
           <CardContent>
-            <a href="" target="_blank">
-              <CardTitle>{title}</CardTitle>
-            </a>
+              <CardTitle $isDarkTheme={websiteTheme === "dark"}>{title}</CardTitle>
             <CardDate>
               <svg
                 xmlns="http://www.w3.org/2000/svg"

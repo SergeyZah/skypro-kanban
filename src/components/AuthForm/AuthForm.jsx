@@ -13,9 +13,11 @@ import {
 import { signIn, signUp } from "../../services/auth";
 import { useContext, useState } from "react";
 import { AuthContext } from "../../context/AuthContext";
+import { TaskContext } from "../../context/TaskContext";
 
 export const AuthForm = ({ isSignUp }) => {
   const { setIsAuth } = useContext(AuthContext);
+  const { getTasks } = useContext(TaskContext);
   const navigate = useNavigate();
 
   const [formData, setFormData] = useState({
@@ -83,6 +85,7 @@ export const AuthForm = ({ isSignUp }) => {
         localStorage.setItem("userInfo", JSON.stringify(data));
         localStorage.setItem("token", JSON.stringify(data.token));
         navigate("/");
+        getTasks();
       }
     } catch (err) {
       setError(err.message);
